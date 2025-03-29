@@ -28,8 +28,8 @@ const CategoryLayout = ({children}: {children: React.ReactNode}) => {
           </li>
         </ul>
       </div>
-      <div className={'w-full'}>
-        <ul className={'inline-flex px-1.5 py-1.5 list-none rounded-md bg-white'}>
+      <div className={'w-full h-[46px] flex justify-between px-1.5 py-1.5'}>
+        <ul className={'inline-flex list-none rounded-md bg-white'}>
           <li className={'flex text-center'}>
             <Link className={'flex items-center justify-center w-[120px] px-0 py-2 text-[16px] mb-0 transition-all ease-in-out border-0 rounded-md cursor-pointer text-black drop-shadow-2xl bg-[rgba(113,64,22,0.5)]'} href="/cafe-list">
               스페셜티 커피
@@ -66,6 +66,9 @@ const CategoryLayout = ({children}: {children: React.ReactNode}) => {
             </Link>
           </li>
         </ul>
+        <div className={'flex items-center justify-center w-[60px] px-0 py-2 text-[16px] mb-0 transition-all ease-in-out border-0 rounded-md cursor-pointer shadow-2xl bg-[rgba(113,64,22,0.5)] text-black'}>
+          필터
+        </div>
       </div>
       <main>{children}</main>
     </div>
