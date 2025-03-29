@@ -5,7 +5,7 @@ const CategoryLayout = ({children}: {children: React.ReactNode}) => {
   return (
     <div className={'w-[80%]'}>
       <div className={'w-[500px]'}>
-        <ul className={'flex px-1.5 py-1.5 list-none rounded-md bg-white'}>
+        <ul className={'flex list-none rounded-md bg-white'}>
           <li className={'flex-auto text-center'}>
             <Link className={'flex items-center justify-start w-full px-0 py-2 text-[20px] font-bold mb-0 transition-all ease-in-out border-0 rounded-md cursor-pointer text-[#714016]'} href="/cafe-list">
               음료
@@ -28,7 +28,7 @@ const CategoryLayout = ({children}: {children: React.ReactNode}) => {
           </li>
         </ul>
       </div>
-      <div className={'w-full h-[46px] flex justify-between px-1.5 py-1.5'}>
+      <div className={'w-full h-[46px] flex justify-between'}>
         <ul className={'inline-flex list-none rounded-md bg-white'}>
           <li className={'flex text-center'}>
             <Link className={'flex items-center justify-center w-[120px] px-0 py-2 text-[16px] mb-0 transition-all ease-in-out border-0 rounded-md cursor-pointer text-black drop-shadow-2xl bg-[rgba(113,64,22,0.5)]'} href="/cafe-list">
@@ -66,7 +66,7 @@ const CategoryLayout = ({children}: {children: React.ReactNode}) => {
             </Link>
           </li>
         </ul>
-        <div className={'flex items-center justify-center w-[60px] px-0 py-2 text-[16px] mb-0 transition-all ease-in-out border-0 rounded-md cursor-pointer shadow-2xl bg-[rgba(113,64,22,0.5)] text-black'}>
+        <div className={'flex items-center justify-center w-[60px] px-0 py-2 text-[16px] mb-0 rounded-md cursor-pointer shadow-2xl bg-[rgba(113,64,22,0.5)] text-black'}>
           필터
         </div>
       </div>
