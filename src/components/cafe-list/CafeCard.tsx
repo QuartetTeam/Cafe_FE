@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import CafeImage from '../../../public/image/cafe-sample.jpg';
+import CafeImage from '@images/cafe-sample.jpg';
 
 const CafeCard = () => {
   return (

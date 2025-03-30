@@ -1,5 +1,5 @@
 import React from 'react';
-import CafeCard from "@/components/cafe-list/CafeCard";
+import CafeCard from "@components/cafe-list/CafeCard";
 
 const CafeList = () => {
     return (
