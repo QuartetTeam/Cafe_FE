@@ -4,7 +4,7 @@ import CafeImage from '../../../public/image/cafe-sample.jpg';
 
 const CafeCard = () => {
   return (
-    <article className={'w-80 h-90 flex flex-col gap-4'}>
+    <article className={'w-80 h-90 flex flex-col gap-4 cursor-pointer'}>
       <Image src={CafeImage} alt={'Cafe Image'} className={'rounded-xl'} />
       <div className={'flex flex-col'}>
         <p className={'text-[17px] font-bold'}>소담소담</p>
