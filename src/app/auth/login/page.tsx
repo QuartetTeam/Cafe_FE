@@ -43,18 +43,13 @@ export default function LoginPage() {
                 placeholder={field.placeholder}
                 className="w-full rounded-[5px] border border-[#7d7d7d] p-[10px] focus:border-[#c56e14] focus:outline-none"
               />
-              {field.type === 'password' && (
-                <div className="flex justify-end">
-                  <button
-                    type="button"
-                    className="cursor-pointer pt-[8px] text-[14px] text-gray-700"
-                  >
-                    아이디/비밀번호 찾기 &gt;
-                  </button>
-                </div>
-              )}
             </div>
           ))}
+        </div>
+        <div className="flex w-full justify-end">
+          <button type="button" className="cursor-pointer pt-[8px] text-[14px] text-gray-700">
+            아이디/비밀번호 찾기 &gt;
+          </button>
         </div>
         <button className="mt-[28px] w-[120px] cursor-pointer rounded-[20px] bg-[#C56E14] px-[5px] py-[8px] font-semibold text-white">
           로그인
