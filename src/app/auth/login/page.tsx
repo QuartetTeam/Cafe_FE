@@ -28,7 +28,7 @@ export default function LoginPage() {
     <div className="mx-auto flex max-w-[640px] flex-col items-center px-[48px] pt-[140px]">
       <div className="mb-[40px] flex flex-col items-center gap-y-[7px]">
         <Image src={'/next.svg'} alt="로고 예시" width={200} height={200} />
-        <span>오늘도 만나서 반가워요!</span>
+        <h1>오늘도 만나서 반가워요!</h1>
       </div>
       <form className="mb-[35px] flex w-full flex-col items-center">
         <div className="flex w-full flex-col gap-y-[15px]">
