@@ -50,7 +50,7 @@ export default function RootLayout({
           <button className="cursor-pointer">로그인</button>
           {/* 토큰 있을 때 이미지+OO님 */}
         </header>
-        <main>{children}</main>
+        <main className="mt-16 p-4">{children}</main>
       </body>
     </html>
   );
