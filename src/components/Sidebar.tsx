@@ -9,13 +9,15 @@ const Sidebar = () => {
   return (
     <aside className="w-[200px] p-6 bg-white h-full flex flex-col justify-between">
       <div className="flex-1 flex flex-col items-center">
-        <ul className="space-y-3 text-sm">
+        <ul className="mt-6 space-y-3 text-sm">
           <li>
             <Link
               href="/mypage-member1"
-              className={`block text-left w-full text-gray-700 hover:text-[#a66a2d] ${
-                pathname.startsWith("/mypage-member1") && !pathname.includes("/favorites") && !pathname.includes("/diary")
-                  ? "font-bold !text-black"
+              className={`block text-center w-full text-gray-700 hover:text-[#a66a2d] ${
+                pathname.startsWith("/mypage-member1") &&
+                !pathname.includes("/favorites") &&
+                !pathname.includes("/diary")
+                  ? "font-bold"
                   : ""
               }`}
             >
@@ -25,10 +27,8 @@ const Sidebar = () => {
           <li>
             <Link
               href="/favorites"
-              className={`block text-left w-full text-gray-700 ${
-                pathname.startsWith("/favorites")
-                  ? "font-bold text-black hover:text-[#a66a2d]"
-                  : "hover:text-[#a66a2d]"
+              className={`block text-center w-full text-gray-700 hover:text-[#a66a2d] ${
+                pathname.startsWith("/favorites") ? "font-bold text-black" : ""
               }`}
             >
               즐겨찾기
@@ -37,7 +37,7 @@ const Sidebar = () => {
           <li>
             <Link
               href="/mypage-member1/diary"
-              className={`block text-left w-full text-gray-700 hover:text-[#a66a2d] ${
+              className={`block text-center w-full text-gray-700 hover:text-[#a66a2d] ${
                 pathname.startsWith("/mypage-member1/diary") ? "font-bold !text-black" : ""
               }`}
             >
@@ -46,9 +46,12 @@ const Sidebar = () => {
           </li>
         </ul>
       </div>
-      <div className="ml-1">
-        <button className="text-sm hover:text-[#a66a2d]">회원탈퇴</button>
-      </div>
+
+      {pathname === "/mypage-member1" && (
+        <div className="ml-1">
+          <button className="text-sm hover:text-[#a66a2d]">회원탈퇴</button>
+        </div>
+      )}
     </aside>
   );
 };
