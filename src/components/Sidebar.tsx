@@ -14,7 +14,11 @@ const Sidebar = () => {
             <Link
               href="/mypage-member1"
               className={`block text-center w-full text-gray-700 hover:text-[#a66a2d] ${
-                pathname === "/mypage-member1" ? "font-bold" : ""
+                pathname.startsWith("/mypage-member1") &&
+                !pathname.includes("/favorites") &&
+                !pathname.includes("/diary")
+                  ? "font-bold"
+                  : ""
               }`}
             >
               계정 관리
@@ -22,11 +26,9 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href="/mypage-member1/favorites"
+              href="/favorites"
               className={`block text-center w-full text-gray-700 hover:text-[#a66a2d] ${
-                pathname.startsWith("/mypage-member1/favorites") || pathname.startsWith("/favorites")
-                  ? "font-bold !text-black"
-                  : ""
+                pathname.startsWith("/favorites") ? "font-bold text-black" : ""
               }`}
             >
               즐겨찾기
