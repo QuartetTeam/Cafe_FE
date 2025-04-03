@@ -1,5 +1,5 @@
 "use client";
-import FavoriteCafeCard from "../components/FavoriteCafeCard";
+import FavoriteCafeCard from "../../components/FavoriteCafeCard";
 import { useState } from "react";
 
 const dummyFavorites = Array.from({ length: 32 }, (_, i) => ({
