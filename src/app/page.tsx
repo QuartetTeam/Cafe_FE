@@ -2,16 +2,71 @@
 import Image from 'next/image';
 import searchIcon from '@images/search_icon.svg';
 import Link from 'next/link';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
+
+import CustomSwiper from './components/swiper/page';
 
 const categoryfields = [
   { id: 1, src: searchIcon, alt: '음료' },
   { id: 2, src: searchIcon, alt: '디저트 / 베이커리' },
   { id: 3, src: searchIcon, alt: '브런치' },
   { id: 4, src: searchIcon, alt: '무드' },
+];
+
+const CafesExamples = [
+  {
+    id: 1,
+    image: '/next.svg',
+    name: '카페 A',
+    address: '부산 서면',
+    date: '10:00~12:00',
+    starCount: '⭐⭐⭐⭐⭐',
+    reviewCount: 99,
+  },
+  {
+    id: 2,
+    image: '/next.svg',
+    name: '카페 B',
+    address: '부산 광안리',
+    date: '10:00~12:00',
+    starCount: '⭐⭐⭐⭐⭐',
+    reviewCount: 99,
+  },
+  {
+    id: 3,
+    image: '/next.svg',
+    name: '카페 C',
+    address: '부산 해운대',
+    date: '10:00~12:00',
+    starCount: '⭐⭐⭐⭐⭐',
+    reviewCount: 99,
+  },
+  {
+    id: 4,
+    image: '/next.svg',
+    name: '카페 C',
+    address: '부산 해운대',
+    date: '10:00~12:00',
+    starCount: '⭐⭐⭐⭐⭐',
+    reviewCount: 99,
+  },
+  {
+    id: 5,
+    image: '/next.svg',
+    name: '카페 C',
+    address: '부산 해운대',
+    date: '10:00~12:00',
+    starCount: '⭐⭐⭐⭐⭐',
+    reviewCount: 99,
+  },
+  {
+    id: 6,
+    image: '/next.svg',
+    name: '카페 C',
+    address: '부산 해운대',
+    date: '10:00~12:00',
+    starCount: '⭐⭐⭐⭐⭐',
+    reviewCount: 99,
+  },
 ];
 
 export default function Home() {
@@ -43,79 +98,17 @@ export default function Home() {
       </section>
       <section className="flex flex-col gap-y-[20px]">
         <span className="text-[20px] font-semibold">지금, 인기있는 카페</span>
-        <div className="relative">
-          <div className="swiper-container">
-            <Swiper
-              modules={[Navigation, Autoplay]}
-              loop={true}
-              spaceBetween={50}
-              slidesPerView={3}
-              navigation={true}
-              autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
-              }}
-            >
-              {[1, 2, 3, 4, 5].map((_, i) => (
-                <SwiperSlide key={i}>
-                  <div className="flex flex-col gap-y-[5px]">
-                    <Image src={'/next.svg'} alt="카페 소개" width={420} height={210} />
-                    <div className="flex flex-col">
-                      <span className="font-semibold">카페 이름{i + 1}</span>
-                      <span className="font-semibold">영업 시간</span>
-                      <span>주소</span>
-                      <div className="flex items-center gap-x-[5px]">
-                        <span>별 갯수</span>
-                        <span>리뷰 수</span>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        </div>
+        <CustomSwiper cafes={CafesExamples} />
       </section>
       <section className="flex flex-col gap-y-[20px]">
         <span className="text-[20px] font-semibold">지금, 가장 가까운 카페</span>
-        <div className="relative">
-          <div className="swiper-container">
-            <Swiper
-              modules={[Navigation, Autoplay]}
-              loop={true}
-              spaceBetween={50}
-              slidesPerView={3}
-              navigation={true}
-              autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
-              }}
-            >
-              {[1, 2, 3, 4, 5].map((_, i) => (
-                <SwiperSlide key={i}>
-                  <div className="flex flex-col gap-y-[5px]">
-                    <Image src={'/next.svg'} alt="카페 소개" width={420} height={210} />
-                    <div className="flex flex-col">
-                      <span className="font-semibold">카페 이름{i + 1}</span>
-                      <span className="font-semibold">영업 시간</span>
-                      <span>주소</span>
-                      <div className="flex items-center gap-x-[5px]">
-                        <span>별 갯수</span>
-                        <span>리뷰 수</span>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        </div>
+        <CustomSwiper cafes={CafesExamples} />
       </section>
       <section className="flex flex-col gap-y-[20px]">
         <span className="text-[20px] font-semibold">지금, 많이 보는 카페일지</span>
         <div className="grid grid-cols-3 gap-6">
           {[1, 2, 3, 4, 5, 6].map((_, i) => (
-            <div key={i} className="rounded-[20px] bg-white p-4 shadow-lg">
+            <div key={i} className="rounded-[20px] bg-white p-4 shadow-lg hover:scale-110 cursor-pointer">
               <Image
                 src={'/next.svg'}
                 alt="일지 소개"
