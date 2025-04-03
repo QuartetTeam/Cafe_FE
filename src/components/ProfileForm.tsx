@@ -125,10 +125,10 @@ export default function ProfileForm() {
   }
 
   return (
-    <div className="bg-white h-screen flex-1 px-10 py-6">
-      <h1 className="text-2xl font-bold text-black mb-6">계정 관리</h1>
+    <div className="bg-white min-h-screen flex-1 px-4 sm:px-6 md:px-10 py-6">
+      <h1 className="text-xl sm:text-2xl font-bold text-black mb-6">계정 관리</h1>
       <form
-        className="space-y-8 max-w-2xl pb-6"
+        className="space-y-8 w-full max-w-2xl pb-6"
         onSubmit={async (e) => {
           e.preventDefault();
 
@@ -202,7 +202,7 @@ export default function ProfileForm() {
       >
         {/* 프로필 이미지 변경 */}
         <div className="flex items-center gap-6">
-          <div className="w-32 h-32 bg-gray-200 rounded-full flex items-center justify-center text-4xl text-gray-400 overflow-hidden">
+          <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gray-200 rounded-full flex items-center justify-center text-3xl sm:text-4xl text-gray-400 overflow-hidden">
             {profileImage ? (
               <img src={profileImage} alt="프로필 이미지" className="w-full h-full object-cover" />
             ) : (
@@ -223,7 +223,7 @@ export default function ProfileForm() {
           <label className="block text-sm font-medium text-black mb-1">이메일</label>
           <input
             type="email"
-            className="w-full px-3 py-2 border rounded text-sm bg-gray-100 text-gray-500"
+            className="w-full px-3 py-2 border rounded text-sm sm:text-base bg-gray-100 text-gray-500"
             value="test1234@naver.com"
             disabled
           />
@@ -237,7 +237,7 @@ export default function ProfileForm() {
             type="text"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
-            className="w-full px-3 py-2 border rounded text-sm text-black"
+            className="w-full px-3 py-2 border rounded text-sm sm:text-base text-black"
             placeholder="닉네임을 입력해주세요"
           />
         </div>
@@ -256,26 +256,26 @@ export default function ProfileForm() {
                 setPhone(formatted);
               }
             }}
-            className="w-full px-3 py-2 border rounded text-sm text-black"
+            className="w-full px-3 py-2 border rounded text-sm sm:text-base text-black"
             placeholder="010-1234-5678"
           />
         </div>
 
         {/* 비밀번호 변경 */}
         <div className="space-y-4">
-          <h2 className="text-lg font-bold text-black">비밀번호 변경</h2>
+          <h2 className="text-base sm:text-lg font-bold text-black">비밀번호 변경</h2>
           <div className="space-y-4">
             {/* 현재 비밀번호 */}
             <div>
               <label className="block text-sm font-medium text-black mb-1">현재 비밀번호</label>
               <div className="relative">
-                <input
-                  type={showCurrent ? "text" : "password"}
-                  value={currentPassword}
-                  onChange={(e) => setCurrentPassword(e.target.value)}
-                  className="w-full px-3 py-2 border rounded text-sm text-black pr-10"
-                  placeholder="현재 비밀번호를 입력해주세요."
-                />
+                    <input
+                      type={showCurrent ? "text" : "password"}
+                      value={currentPassword}
+                      onChange={(e) => setCurrentPassword(e.target.value)}
+                      className="w-full px-3 py-2 border rounded text-sm sm:text-base text-black pr-10"
+                      placeholder="현재 비밀번호를 입력해주세요."
+                    />
                 <button
                   type="button"
                   onClick={() => setShowCurrent((prev) => !prev)}
@@ -358,7 +358,7 @@ export default function ProfileForm() {
 
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 px-4">
-          <div className="bg-white p-6 rounded-xl w-[320px] text-center">
+          <div className="bg-white p-4 sm:p-6 rounded-xl w-full max-w-xs text-center">
             <h2 className="text-lg font-bold text-black mb-6">프로필 사진 바꾸기</h2>
             <form
               onSubmit={(e) => {

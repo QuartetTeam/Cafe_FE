@@ -11,9 +11,9 @@ export default function ResetPasswordPage() {
     const [confirmPassword, setConfirmPassword] = useState("");
 
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="w-full max-w-md bg-white border rounded-xl p-6 shadow-md">
-          <h1 className="text-xl font-bold text-center text-black mb-6">비밀번호 재설정</h1>
+      <div className="min-h-screen flex items-center justify-center bg-white px-4 sm:px-0">
+        <div className="w-full max-w-md bg-white border rounded-xl p-4 sm:p-6 shadow-md">
+          <h1 className="text-lg sm:text-xl font-bold text-center text-black mb-6">비밀번호 재설정</h1>
   
           <form
             className="space-y-4"
@@ -45,7 +45,7 @@ export default function ResetPasswordPage() {
               <label className="block text-sm font-medium text-black mb-1">새 비밀번호</label>
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full px-3 py-2 border rounded text-sm text-black"
+                className="w-full px-3 py-2 border rounded text-sm sm:text-base text-black"
                 placeholder="새 비밀번호 입력"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -62,7 +62,7 @@ export default function ResetPasswordPage() {
               <label className="block text-sm font-medium text-black mb-1">비밀번호 확인</label>
               <input
                 type={showConfirmPassword ? "text" : "password"}
-                className="w-full px-3 py-2 border rounded text-sm text-black"
+                className="w-full px-3 py-2 border rounded text-sm sm:text-base text-black"
                 placeholder="비밀번호 재입력"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
@@ -77,7 +77,7 @@ export default function ResetPasswordPage() {
             </div>
             <button
               type="submit"
-              className="w-full py-2 bg-[#a66a2d] hover:bg-[#915a23] text-white rounded-full"
+              className="w-full py-2 sm:py-2.5 bg-[#a66a2d] hover:bg-[#915a23] text-white rounded-full text-sm sm:text-base"
             >
               재설정 완료
             </button>
