@@ -3,7 +3,7 @@ import Image from 'next/image';
 import searchIcon from '@images/search_icon.svg';
 import Link from 'next/link';
 
-import CustomSwiper from './components/swiper/page';
+import CustomSwiper from '../components/swiper/page';
 
 const categoryfields = [
   { id: 1, src: searchIcon, alt: '음료' },
