@@ -78,8 +78,8 @@ export default function FavoritesPage() {
   };
 
   return (
-    <div className="px-10 py-8">
-      <div className="mb-4 flex flex-col items-end gap-2">
+    <div className="px-4 sm:px-6 md:px-10 py-6 sm:py-8">
+      <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
         <FavoriteEditControls
           onClick={() => setIsEditing(true)}
           isEditing={isEditing}
@@ -89,14 +89,14 @@ export default function FavoritesPage() {
           setIsEditing={setIsEditing}
           setFavorites={setFavorites}
         />
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center md:justify-end">
           <CategoryFilter
             categories={categories}
             selected={selectedCategory}
             onSelect={handleFilterClick}
           />
         </div>
-        <div className="text-sm">
+        <div className="text-sm flex justify-end">
           <label htmlFor="perPage" className="mr-2 text-black">표시 개수:</label>
           <select
             id="perPage"
@@ -121,12 +121,12 @@ export default function FavoritesPage() {
         moveCafe={moveCafe}
       />
 
-      <div className="mt-8 flex justify-center gap-2">
+      <div className="mt-8 flex flex-wrap justify-center gap-2">
         {Array.from({ length: totalPages }, (_, i) => (
           <button
             key={i + 1}
             onClick={() => setCurrentPage(i + 1)}
-            className={`px-3 py-1 border rounded ${
+            className={`px-3 py-1 border rounded text-sm ${
               currentPage === i + 1 ? "bg-blue-500 text-white" : "bg-white text-black"
             }`}
           >

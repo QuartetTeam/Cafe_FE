@@ -12,14 +12,14 @@ export default function CategoryFilter({ categories, selected, onSelect }: Props
           <button
             key={category}
             onClick={() => onSelect(category)}
-            className={`flex flex-col items-center justify-center w-28 h-32 rounded-md bg-white hover:bg-gray-100 transition text-sm font-medium shadow text-black ${
+            className={`flex flex-col items-center justify-center w-24 h-28 sm:w-28 sm:h-32 rounded-md bg-white hover:bg-gray-100 transition text-sm font-medium shadow text-black ${
               selected === category ? 'shadow-inner border border-gray-400' : ''
             }`}
           >
             <img
               src="/search.png"
               alt="category icon"
-              className="w-12 h-12 mt-2"
+              className="w-10 h-10 sm:w-12 sm:h-12 mt-2"
             />
             <span className="mt-2">{category}</span>
           </button>

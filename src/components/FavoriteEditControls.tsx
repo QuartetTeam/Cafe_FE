@@ -1,4 +1,4 @@
-// 편집 모드에서의 버튼 ( 전체 선택, 취소, 삭제 )
+// 편집 모드에서의 버튼 (전체 선택, 취소, 삭제 )
 import React from "react";
 import { Cafe } from "../types";
 
@@ -22,7 +22,7 @@ export default function FavoriteEditControls({
   setFavorites,
 }: Props) {
   return (
-    <div className="flex items-center justify-end mb-2 mt-4">
+    <div className="flex flex-wrap items-center justify-end gap-2 mb-2 mt-4">
       {!isEditing ? (
         <button
           onClick={onClick}

@@ -32,8 +32,8 @@ export default function SearchResultsPage() {
         "{keyword}"에 대한 검색 결과
       </h2>
 
-      <div className="mb-4 flex justify-end">
-        <label htmlFor="perPage" className="mr-2 font-medium">표시 개수:</label>
+      <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-end gap-2">
+        <label htmlFor="perPage" className="font-medium">표시 개수:</label>
         <select
           id="perPage"
           value={perPage}
@@ -54,7 +54,7 @@ export default function SearchResultsPage() {
       {paginatedData.length === 0 ? (
         <p className="font-bold text-gray-900">검색 결과가 없습니다.</p>
       ) : (
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
           {paginatedData.map((cafe) => (
             <FavoriteCafeCard
               key={cafe.id}
