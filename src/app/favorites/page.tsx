@@ -20,6 +20,8 @@ const generateDummyFavorites = (): Cafe[] => (
 
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState<Cafe[]>(generateDummyFavorites());
+  const [filteredFavorites, setFilteredFavorites] = useState<Cafe[]>(favorites);
+  const [paginatedData, setPaginatedData] = useState<Cafe[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -27,22 +29,27 @@ export default function FavoritesPage() {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const categories = ["음료", "디저트/베이커리", "브런치", "무드"];
 
+  // 필터 적용
+  useEffect(() => {
+    const filtered = selectedCategory
+      ? favorites.filter((cafe) => cafe.category === selectedCategory)
+      : favorites;
+    setFilteredFavorites(filtered);
+    setCurrentPage(1); // 필터 바뀌면 첫 페이지로 이동
+  }, [favorites, selectedCategory]);
+
+  // 페이지네이션 적용
+  useEffect(() => {
+    const start = (currentPage - 1) * perPage;
+    const end = currentPage * perPage;
+    setPaginatedData(filteredFavorites.slice(start, end));
+  }, [filteredFavorites, currentPage, perPage]);
+
+  const totalPages = Math.ceil(filteredFavorites.length / perPage);
+
   const handleFilterClick = (category: string) => {
     setSelectedCategory((prev) => (prev === category ? "" : category));
   };
-
-  // 필터링된 즐겨찾기 목록
-  const filteredFavorites = selectedCategory
-    ? favorites.filter((cafe) => cafe.category === selectedCategory)
-    : favorites;
-
-  // 전체 페이지 수 계산
-  const totalPages = Math.ceil(filteredFavorites.length / perPage);
-
-  const paginatedData = filteredFavorites.slice(
-    (currentPage - 1) * perPage,
-    currentPage * perPage
-  );
 
   const toggleFavorite = (id: number) => {
     setFavorites((prev) =>
@@ -53,42 +60,22 @@ export default function FavoritesPage() {
   };
 
   const moveCafe = (id: number, direction: "up" | "down") => {
-    let newIndex = -1;
-
     setFavorites((prev) => {
       const index = prev.findIndex((cafe) => cafe.id === id);
       const updated = [...prev];
-
       if (direction === "up" && index > 0) {
         [updated[index - 1], updated[index]] = [updated[index], updated[index - 1]];
       } else if (direction === "down" && index < prev.length - 1) {
         [updated[index], updated[index + 1]] = [updated[index + 1], updated[index]];
       }
-
-      newIndex = updated.findIndex((cafe) => cafe.id === id);
       return updated;
     });
-
-    // 순서 변경 후 페이지가 범위를 벗어나지 않도록 조정
-    const newPage = Math.floor(newIndex / perPage) + 1;
-    const totalPages = Math.ceil(filteredFavorites.length / perPage);
-
-    // 만약 newPage가 totalPages보다 크다면 마지막 페이지로 이동
-    setCurrentPage(newPage > totalPages ? totalPages : newPage);
   };
 
   const handlePerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPerPage(Number(e.target.value));
-    setCurrentPage(1); // perPage가 바뀔 때마다 페이지는 1페이지로 리셋
+    setCurrentPage(1);
   };
-
-  // useEffect로 favorites가 변경될 때마다 페이지네이션 재계산
-  useEffect(() => {
-    const totalPages = Math.ceil(filteredFavorites.length / perPage);
-    if (currentPage > totalPages) {
-      setCurrentPage(totalPages || 1);
-    }
-  }, [favorites, perPage, filteredFavorites, currentPage]);
 
   return (
     <div className="px-10 py-8">
@@ -125,7 +112,7 @@ export default function FavoritesPage() {
       </div>
 
       <FavoriteCafeList
-        cafes={paginatedData} // paginatedData를 사용해 필터링된 데이터를 전달
+        cafes={paginatedData}
         isEditing={isEditing}
         selectedIds={selectedIds}
         setSelectedIds={setSelectedIds}
