@@ -18,20 +18,26 @@ export default function FavoriteCafeCard({
   onToggleFavorite,
 }: FavoriteCafeCardProps) {
   return (
-    <div className="rounded-xl bg-gray-200 p-6 relative w-full">
+    <div className="rounded-xl bg-white shadow-md relative w-full p-0 overflow-hidden">
       <span
         onClick={onToggleFavorite}
-        className="absolute top-4 right-4 cursor-pointer"
+        className="absolute top-4 right-4 cursor-pointer z-10"
         title={isFavorite ? "즐겨찾기 해제" : "즐겨찾기 추가"}
       >
         {isFavorite ? "❤️" : "🖤"}
       </span>
-      <div className="mb-4 h-40 bg-gray-300 rounded flex items-center justify-center text-sm text-gray-500">
-        {image ? <img src={image} alt={`${name} 대표 이미지`} className="h-full w-full object-cover rounded" /> : "카페 대표 이미지"}
+      <div className="h-36 bg-gray-300">
+        <img
+          src={image || "/next.svg"}
+          alt={`${name} 대표 이미지`}
+          className="h-full w-full object-cover"
+        />
       </div>
-      <h2 className="text-lg font-semibold">{name}</h2>
-      <p className="text-sm text-gray-700">{time}</p>
-      <p className="text-sm text-gray-500">{location}</p>
+      <div className="p-4">
+        <h2 className="text-lg font-semibold text-black">{name}</h2>
+        <p className="text-sm text-gray-700">{time}</p>
+        <p className="text-sm text-gray-500">{location}</p>
+      </div>
     </div>
   );
 }

@@ -12,7 +12,7 @@ export default function CategoryFilter({ categories, selected, onSelect }: Props
           <button
             key={category}
             onClick={() => onSelect(category)}
-            className={`flex flex-col items-center justify-center w-28 h-32 rounded-md bg-white hover:bg-gray-100 transition text-sm font-medium shadow ${
+            className={`flex flex-col items-center justify-center w-28 h-32 rounded-md bg-white hover:bg-gray-100 transition text-sm font-medium shadow text-black ${
               selected === category ? 'shadow-inner border border-gray-400' : ''
             }`}
           >
@@ -28,4 +28,3 @@ export default function CategoryFilter({ categories, selected, onSelect }: Props
     </div>
   );
 }
-
