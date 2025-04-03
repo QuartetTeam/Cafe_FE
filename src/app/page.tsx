@@ -16,7 +16,7 @@ const categoryfields = [
 
 export default function Home() {
   return (
-    <div className="mx-auto flex max-w-[1200px] flex-col gap-y-[60px] px-[100px] pt-[50px]">
+    <div className="mx-auto flex max-w-[1200px] flex-col gap-y-[60px] px-[100px] py-[50px]">
       <div className="relative">
         <input
           placeholder="어떤 카페를 찾고 있나요?"
@@ -43,75 +43,79 @@ export default function Home() {
       </section>
       <section className="flex flex-col gap-y-[20px]">
         <span className="text-[20px] font-semibold">지금, 인기있는 카페</span>
-        <div className="swiper-container">
-          <Swiper
-            modules={[Navigation, Autoplay]}
-            loop={true}
-            spaceBetween={50}
-            slidesPerView={3}
-            navigation={true}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-          >
-            {[1, 2, 3, 4, 5].map((_, i) => (
-              <SwiperSlide key={i}>
-                <div className="flex flex-col gap-y-[5px]">
-                  <Image src={'/next.svg'} alt="카페 소개" width={420} height={210} />
-                  <div className="flex flex-col">
-                    <span className="font-semibold">카페 이름{i + 1}</span>
-                    <span className="font-semibold">영업 시간</span>
-                    <span>주소</span>
-                    <div className="flex items-center gap-x-[5px]">
-                      <span>별 갯수</span>
-                      <span>리뷰 수</span>
+        <div className="relative">
+          <div className="swiper-container">
+            <Swiper
+              modules={[Navigation, Autoplay]}
+              loop={true}
+              spaceBetween={50}
+              slidesPerView={3}
+              navigation={true}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+            >
+              {[1, 2, 3, 4, 5].map((_, i) => (
+                <SwiperSlide key={i}>
+                  <div className="flex flex-col gap-y-[5px]">
+                    <Image src={'/next.svg'} alt="카페 소개" width={420} height={210} />
+                    <div className="flex flex-col">
+                      <span className="font-semibold">카페 이름{i + 1}</span>
+                      <span className="font-semibold">영업 시간</span>
+                      <span>주소</span>
+                      <div className="flex items-center gap-x-[5px]">
+                        <span>별 갯수</span>
+                        <span>리뷰 수</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       </section>
       <section className="flex flex-col gap-y-[20px]">
         <span className="text-[20px] font-semibold">지금, 가장 가까운 카페</span>
-        <div className="swiper-container">
-          <Swiper
-            modules={[Navigation, Autoplay]}
-            loop={true}
-            spaceBetween={50}
-            slidesPerView={3}
-            navigation={true}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-          >
-            {[1, 2, 3, 4, 5].map((_, i) => (
-              <SwiperSlide key={i}>
-                <div className="flex flex-col gap-y-[5px]">
-                  <Image src={'/next.svg'} alt="카페 소개" width={420} height={210} />
-                  <div className="flex flex-col">
-                    <span className="font-semibold">카페 이름{i + 1}</span>
-                    <span className="font-semibold">영업 시간</span>
-                    <span>주소</span>
-                    <div className="flex items-center gap-x-[5px]">
-                      <span>별 갯수</span>
-                      <span>리뷰 수</span>
+        <div className="relative">
+          <div className="swiper-container">
+            <Swiper
+              modules={[Navigation, Autoplay]}
+              loop={true}
+              spaceBetween={50}
+              slidesPerView={3}
+              navigation={true}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+            >
+              {[1, 2, 3, 4, 5].map((_, i) => (
+                <SwiperSlide key={i}>
+                  <div className="flex flex-col gap-y-[5px]">
+                    <Image src={'/next.svg'} alt="카페 소개" width={420} height={210} />
+                    <div className="flex flex-col">
+                      <span className="font-semibold">카페 이름{i + 1}</span>
+                      <span className="font-semibold">영업 시간</span>
+                      <span>주소</span>
+                      <div className="flex items-center gap-x-[5px]">
+                        <span>별 갯수</span>
+                        <span>리뷰 수</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       </section>
       <section className="flex flex-col gap-y-[20px]">
         <span className="text-[20px] font-semibold">지금, 많이 보는 카페일지</span>
-        <ul className="flex gap-x-[30px]">
-          {[1, 2, 3].map((_, i) => (
-            <li key={i} className="flex flex-col gap-y-[5px]">
+        <div className="grid grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5, 6].map((_, i) => (
+            <div key={i} className="rounded-[20px] bg-white p-4 shadow-lg">
               <Image
                 src={'/next.svg'}
                 alt="일지 소개"
@@ -119,20 +123,20 @@ export default function Home() {
                 height={200}
                 className="rounded-[20px]"
               />
-              <div className="flex flex-col">
+              <div className="mt-3 flex flex-col">
                 <div className="flex items-center gap-x-[6px]">
                   <Image src={'/next.svg'} alt="작성자 프로필" width={20} height={20} />
-                  <span className="font-semibold">작성자 1</span>
+                  <span className="font-semibold">작성자 {i + 1}</span>
                 </div>
-                <span className="font-semibold">카페 이름</span>
+                <span className="font-semibold">카페 이름 {i + 1}</span>
                 <span>영업 시간</span>
                 <span>주소</span>
                 <span>별 갯수</span>
-                <span>일지</span>
+                <span>일지 내용 일부...</span>
               </div>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </section>
     </div>
   );
