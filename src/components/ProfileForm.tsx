@@ -56,7 +56,8 @@ export default function ProfileForm() {
           onSubmit={async (e) => {
             e.preventDefault();
             setPasswordInput(""); // always clear input
-            try {
+            try { 
+              //password api 연동
               const res = await fetch("/api/verify-password", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
