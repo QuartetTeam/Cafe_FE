@@ -1,13 +1,13 @@
-'use client';  // 클라이언트 컴포넌트로 설정
+'use client';
 
-import { ReactNode, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';  // Heroicons을 사용한 돋보기 아이콘
-import FavoriteCafeCard from '../../components/FavoriteCafeCard';  // FavoriteCafeCard 컴포넌트 import
+import { ReactNode, useState, useEffect } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';  // usePathname과 useSearchParams 사용
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';  
+import FavoriteCafeCard from '../../components/FavoriteCafeCard';  
 
 export default function FavoritesLayout({ children }: { children: ReactNode }) {
   const [searchQuery, setSearchQuery] = useState('');
-  const router = useRouter();
+  const pathname = usePathname();  // usePathname을 사용하여 현재 경로를 가져옴
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -15,15 +15,26 @@ export default function FavoritesLayout({ children }: { children: ReactNode }) {
 
   const handleSearchSubmit = () => {
     if (searchQuery.trim()) {
-      router.push(`/favorites/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      // 쿼리 파라미터를 추가하여 검색 결과로 라우팅
+      window.location.href = `/favorites/search?q=${encodeURIComponent(searchQuery.trim())}`;
     }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handleSearchSubmit();  // 엔터 키 눌렀을 때 검색 실행
+      handleSearchSubmit();
     }
   };
+
+  // 리셋 상태
+  const resetSearch = () => {
+    setSearchQuery('');  // 검색어 초기화
+  };
+
+  // pathname이 바뀔 때마다 검색어 초기화
+  useEffect(() => {
+    resetSearch();
+  }, [pathname]); // pathname이 바뀔 때마다 검색어 초기화
 
   return (
     <div className="flex flex-col bg-white w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen">

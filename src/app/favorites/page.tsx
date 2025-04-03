@@ -1,6 +1,6 @@
 "use client";
 import FavoriteCafeCard from "../../components/FavoriteCafeCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Cafe } from "../../types";
 import CategoryFilter from "../../components/CategoryFilter";
 import FavoriteCafeList from "../../components/FavoriteCafeList";
@@ -39,7 +39,6 @@ export default function FavoritesPage() {
   // 전체 페이지 수 계산
   const totalPages = Math.ceil(filteredFavorites.length / perPage);
 
-  // 필터링된 즐겨찾기 목록에 페이지네이션 적용
   const paginatedData = filteredFavorites.slice(
     (currentPage - 1) * perPage,
     currentPage * perPage
@@ -70,14 +69,26 @@ export default function FavoritesPage() {
       return updated;
     });
 
+    // 순서 변경 후 페이지가 범위를 벗어나지 않도록 조정
     const newPage = Math.floor(newIndex / perPage) + 1;
-    setCurrentPage(newPage);
+    const totalPages = Math.ceil(filteredFavorites.length / perPage);
+
+    // 만약 newPage가 totalPages보다 크다면 마지막 페이지로 이동
+    setCurrentPage(newPage > totalPages ? totalPages : newPage);
   };
 
   const handlePerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPerPage(Number(e.target.value));
     setCurrentPage(1); // perPage가 바뀔 때마다 페이지는 1페이지로 리셋
   };
+
+  // useEffect로 favorites가 변경될 때마다 페이지네이션 재계산
+  useEffect(() => {
+    const totalPages = Math.ceil(filteredFavorites.length / perPage);
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages || 1);
+    }
+  }, [favorites, perPage, filteredFavorites, currentPage]);
 
   return (
     <div className="px-10 py-8">
@@ -114,11 +125,7 @@ export default function FavoritesPage() {
       </div>
 
       <FavoriteCafeList
-        cafes={
-          isEditing
-            ? filteredFavorites.filter((cafe) => cafe.isFavorite)
-            : paginatedData.filter((cafe) => cafe.isFavorite)
-        }
+        cafes={paginatedData} // paginatedData를 사용해 필터링된 데이터를 전달
         isEditing={isEditing}
         selectedIds={selectedIds}
         setSelectedIds={setSelectedIds}
