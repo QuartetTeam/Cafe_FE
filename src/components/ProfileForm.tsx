@@ -57,20 +57,27 @@ export default function ProfileForm() {
             e.preventDefault();
             setPasswordInput(""); // always clear input
             try {
-              if (passwordInput === "0000") {
+              const res = await fetch("/api/verify-password", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ password: passwordInput }),
+              });
+
+              const result = await res.json();
+
+              if (res.ok && result.success) {
                 setIsVerified(true);
                 setFailCount(0);
               } else {
                 const nextFail = failCount + 1;
                 setFailCount(nextFail);
+                setPasswordError("비밀번호가 일치하지 않습니다.");
                 if (nextFail >= 5) {
                   setShowResetModal(true);
-                } else {
-                  setPasswordError("비밀번호가 일치하지 않습니다.");
                 }
               }
             } catch {
-              setPasswordError("오류가 발생했습니다.");
+              setPasswordError("서버와 연결 중 오류가 발생했습니다.");
             }
           }}
           className="bg-white p-6 rounded-xl w-full max-w-xs text-center animate-fade-in shadow-md"
