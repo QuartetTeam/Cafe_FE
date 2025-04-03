@@ -6,7 +6,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { useRef, useState } from 'react';
 
 const categoryfields = [
   { id: 1, src: searchIcon, alt: '음료' },
@@ -16,11 +15,6 @@ const categoryfields = [
 ];
 
 export default function Home() {
-  const popularPrevRef = useRef(null);
-  const popularNextRef = useRef(null);
-  const nearbyPrevRef = useRef(null);
-  const nearbyNextRef = useRef(null);
-
   return (
     <div className="mx-auto flex max-w-[1200px] flex-col gap-y-[60px] px-[100px] pt-[50px]">
       <div className="relative">
@@ -50,19 +44,12 @@ export default function Home() {
       <section className="flex flex-col gap-y-[20px]">
         <span className="text-[20px] font-semibold">지금, 인기있는 카페</span>
         <div className="swiper-container">
-          <div className="absolute top-[93%] left-[10%]" ref={popularPrevRef}>
-            <button className="swiper-button-prev font-semibold !text-black after:!text-[33px]"></button>
-          </div>
-          <div className="absolute top-[93%] right-[10%]" ref={popularNextRef}>
-            <button className="swiper-button-next font-semibold !text-black after:!text-[33px]"></button>
-          </div>
-
           <Swiper
             modules={[Navigation, Autoplay]}
             loop={true}
             spaceBetween={50}
             slidesPerView={3}
-            navigation={{ prevEl: popularPrevRef.current, nextEl: popularNextRef.current }}
+            navigation={true}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
@@ -90,19 +77,12 @@ export default function Home() {
       <section className="flex flex-col gap-y-[20px]">
         <span className="text-[20px] font-semibold">지금, 가장 가까운 카페</span>
         <div className="swiper-container">
-          <div className="absolute top-[93%] left-[10%]" ref={nearbyPrevRef}>
-            <button className="swiper-button-prev font-semibold !text-black after:!text-[33px]"></button>
-          </div>
-          <div className="absolute top-[93%] right-[10%]" ref={nearbyNextRef}>
-            <button className="swiper-button-next font-semibold !text-black after:!text-[33px]"></button>
-          </div>
-
           <Swiper
             modules={[Navigation, Autoplay]}
             loop={true}
             spaceBetween={50}
             slidesPerView={3}
-            navigation={{ prevEl: nearbyPrevRef.current, nextEl: nearbyNextRef.current }}
+            navigation={true}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
