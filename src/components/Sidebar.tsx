@@ -24,9 +24,9 @@ const Sidebar = ({ isOpen, onClose, className }: SidebarProps) => {
 
       {/* 사이드바 - 슬라이드 애니메이션 포함 */}
       <aside
-        className={`absolute md:static top-[64px] left-0 h-full w-[200px] bg-white z-40 flex flex-col justify-between transition-transform duration-300 transform ${
+        className={`md:absolute ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0`}
+        } md:translate-x-0 md:static md:h-full md:z-10 md:pt-[64px] w-[200px] bg-white flex flex-col justify-between transition-transform duration-300 transform ${className}`}
       >
         <div className="flex-1 flex flex-col items-center p-6 justify-start pt-12">
           <ul className="space-y-5 text-sm sm:text-sm md:text-base text-center">
