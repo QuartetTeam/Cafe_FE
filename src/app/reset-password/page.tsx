@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { FiEye, FiEyeOff } from "react-icons/fi";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"; // Heroicons 아이콘 임포트
 
 export default function ResetPasswordPage() {
     const router = useRouter();
@@ -55,7 +55,7 @@ export default function ResetPasswordPage() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-2/3 -translate-y-1/2 text-gray-500 text-sm"
               >
-                {showPassword ? <FiEye /> : <FiEyeOff />}
+                {showPassword ? <EyeIcon /> : <EyeSlashIcon />}
               </button>
             </div>
             <div className="relative">
@@ -72,7 +72,7 @@ export default function ResetPasswordPage() {
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 className="absolute right-3 top-2/3 -translate-y-1/2 text-gray-500 text-sm"
               >
-                {showConfirmPassword ? <FiEye /> : <FiEyeOff />}
+                {showConfirmPassword ? <EyeIcon /> : <EyeSlashIcon />}
               </button>
             </div>
             <button
