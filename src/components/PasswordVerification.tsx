@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"; // Heroicons 아이콘 임포트
 import PasswordChangeForm from "./PasswordChangeForm";
+import { useRouter } from "next/navigation";
 
 interface PasswordVerificationProps {
   setIsVerified: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,9 +22,18 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
   const [showPassword, setShowPassword] = useState(false);  // 비밀번호 표시 여부
   const [errorMessage, setErrorMessage] = useState(""); // 오류 메시지 상태
   const [isPasswordResetVisible, setIsPasswordResetVisible] = useState(false); // 비밀번호 재설정 모달 상태
+  const router = useRouter();
 
   // 기본 비밀번호 설정
   const correctPassword = "0000";
+
+  // 자동 인증 처리
+  useEffect(() => {
+    const isVerified = localStorage.getItem("verified");
+    if (isVerified === "true") {
+      setIsVerified(true); // 인증 처리 후 모달 생략
+    }
+  }, []);
 
   // 비밀번호 입력값 변경 처리
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +45,12 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (password === correctPassword) {
-      setIsVerified(true); // 비밀번호가 맞으면 인증 처리
+      localStorage.setItem("verified", "true"); // 일시적으로 저장
+      setIsVerified(true);
+      router.push("/mypage-owner");
+      setTimeout(() => {
+        localStorage.removeItem("verified"); // 이동 후 verified 제거
+      }, 100); // 페이지 이동 직후 제거
     } else {
       setFailCount((prev) => prev + 1);
     }
@@ -76,12 +91,12 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
         />
         <button
           onClick={togglePasswordVisibility}
-          className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500"
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
         >
           {showPassword ? (
-            <EyeSlashIcon className="w-6 h-6 text-gray-500 relative top-[1px]" /> // EyeOff 아이콘
+            <EyeSlashIcon className="w-6 h-6" />
           ) : (
-            <EyeIcon className="w-6 h-6 text-gray-500 relative top-[1px]" /> // Eye 아이콘
+            <EyeIcon className="w-6 h-6" />
           )}
         </button>
       </div>
