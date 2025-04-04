@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Link from "next/link";

@@ -125,10 +125,11 @@ export default function ProfileForm() {
   }
 
   return (
-    <div className="bg-white min-h-screen flex-1 px-4 sm:px-6 md:px-10 py-6">
+    <div className="bg-white min-h-screen flex flex-col px-4 sm:px-6 md:px-10 py-6">
       <h1 className="text-xl sm:text-2xl font-bold text-black mb-6">계정 관리</h1>
-      <form
-        className="space-y-8 w-full max-w-2xl pb-6"
+      <div className="flex justify-center">
+        <form
+        className="space-y-8 w-full max-w-md sm:max-w-lg md:max-w-2xl pb-6"
         onSubmit={async (e) => {
           e.preventDefault();
 
@@ -355,6 +356,7 @@ export default function ProfileForm() {
           </button>
         </div>
       </form>
+      </div>
 
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 px-4">
