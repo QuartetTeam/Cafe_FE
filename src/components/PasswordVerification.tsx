@@ -1,7 +1,6 @@
-"use client"; // 클라이언트 컴포넌트로 설정
-
 import React, { useState, useEffect } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"; // Heroicons 아이콘 임포트
+import PasswordChangeForm from "./PasswordChangeForm";
 
 interface PasswordVerificationProps {
   setIsVerified: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,6 +20,7 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
   const [password, setPassword] = useState("0000");  // 비밀번호 상태
   const [showPassword, setShowPassword] = useState(false);  // 비밀번호 표시 여부
   const [errorMessage, setErrorMessage] = useState(""); // 오류 메시지 상태
+  const [isPasswordResetVisible, setIsPasswordResetVisible] = useState(false); // 비밀번호 재설정 모달 상태
 
   // 기본 비밀번호 설정
   const correctPassword = "0000";
@@ -47,7 +47,7 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
     }
     if (failCount >= 5) {
       setShowResetModal(true);
-      setShowPasswordReset(true); // 비밀번호 재설정 모달 자동 표시
+      setIsPasswordResetVisible(true); // 비밀번호 재설정 모달 자동 표시
     }
   }, [failCount]);
 
@@ -59,7 +59,7 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
   // 비밀번호 재설정 모달 열기
   const handlePasswordResetClick = () => {
     setShowResetModal(true);
-    setShowPasswordReset(true); // 비밀번호 재설정 모달 열기
+    setIsPasswordResetVisible(true); // 비밀번호 재설정 모달 열기
   };
 
   return (
@@ -103,6 +103,13 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
       >
         확인
       </button>
+      {isPasswordResetVisible && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+            <PasswordChangeForm />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

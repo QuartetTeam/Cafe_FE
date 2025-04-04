@@ -23,7 +23,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
 
       {/* 사이드바 - 슬라이드 애니메이션 포함 */}
       <aside
-        className={`fixed md:static top-0 left-0 h-full w-[200px] bg-white z-40 flex-col justify-between transition-transform duration-300 transform relative ${
+        className={`fixed md:static top-0 left-0 h-full w-[180px] sm:w-[200px] md:w-[220px] bg-white z-40 flex-col justify-between transition-transform duration-300 transform relative ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 md:flex`}
       >
@@ -37,17 +37,13 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             &times;
           </button>
         </div>
-        <div className="flex-1 flex flex-col items-center p-6">
-          <ul className="mt-6 space-y-3 text-sm">
+        <div className="flex-1 flex flex-col items-center p-6 justify-start pt-12">
+          <ul className="space-y-5 text-sm sm:text-sm md:text-base text-center">
             <li>
               <Link
-                href="/mypage-member1"
+                href="/mypage-owner"
                 className={`block text-center w-full text-gray-700 hover:text-[#a66a2d] ${
-                  pathname.startsWith("/mypage-member1") &&
-                  !pathname.includes("/favorites") &&
-                  !pathname.includes("/diary")
-                    ? "font-bold"
-                    : ""
+                  pathname === "/mypage-owner" ? "font-bold text-black" : ""
                 }`}
                 onClick={onClose}
               >
@@ -56,30 +52,30 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
             </li>
             <li>
               <Link
-                href="/favorites"
+                href="/mypage-owner/edit"
                 className={`block text-center w-full text-gray-700 hover:text-[#a66a2d] ${
-                  pathname.startsWith("/favorites") ? "font-bold text-black" : ""
+                  pathname.startsWith("/mypage-owner/edit") ? "font-bold text-black" : ""
                 }`}
                 onClick={onClose}
               >
-                즐겨찾기
+                매장 정보 수정
               </Link>
             </li>
             <li>
               <Link
-                href="/mypage-member1/diary"
+                href="/mypage-owner/manage"
                 className={`block text-center w-full text-gray-700 hover:text-[#a66a2d] ${
-                  pathname.startsWith("/mypage-member1/diary") ? "font-bold !text-black" : ""
+                  pathname.startsWith("/mypage-owner/manage") ? "font-bold text-black" : ""
                 }`}
                 onClick={onClose}
               >
-                카페일지
+                매장 관리
               </Link>
             </li>
           </ul>
         </div>
 
-        {pathname === "/mypage-member1" && (
+        {pathname === "/mypage-owner" && (
           <div className="ml-1 p-6">
             <button className="text-sm hover:text-[#a66a2d]">회원탈퇴</button>
           </div>
