@@ -25,7 +25,7 @@ export default function ProfileForm() {
   const [isVerified, setIsVerified] = useState(false);
   const [failCount, setFailCount] = useState(0);
   const [showResetModal, setShowResetModal] = useState(false);
-  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [profileImage, setProfileImage] = useState<File | string | null>(null);
   const [nickname, setNickname] = useState("");
   const [phone, setPhone] = useState("");
   const [newPassword, setNewPassword] = useState("");

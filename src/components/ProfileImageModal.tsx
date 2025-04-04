@@ -3,23 +3,22 @@ import { useRouter } from "next/navigation";
 
 // props 타입 정의
 interface ProfileImageModalProps {
-  setProfileImage: (file: string) => void;  // 프로필 이미지를 설정하는 함수
-  closeModal: () => void;  // 모달을 닫는 함수
+  setProfileImage: (url: string) => void;
+  closeModal: () => void;
 }
 
 const ProfileImageModal: React.FC<ProfileImageModalProps> = ({ setProfileImage, closeModal }) => {
     const fileInputRef = React.useRef<HTMLInputElement>(null);
-    const defaultProfileImage = "/default-profile.png"; // 기본 이미지 경로
     const router = useRouter();
 
     const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0]; //파일 존재 확인
+      const file = e.target.files?.[0];
       if (file) {
         const imageUrl = URL.createObjectURL(file);
-        localStorage.setItem("profileImage", imageUrl); // localStorage에 저장
-        setProfileImage(imageUrl); // 상태에도 반영
-        closeModal(); // 모달 닫기
-        router.push("/mypage-owner"); // 계정 관리 페이지로 이동
+        setProfileImage(imageUrl);
+        localStorage.setItem("profileImage", imageUrl);
+        closeModal();
+        router.push("/mypage-owner");
       } else {
         console.error("파일이 선택되지 않았습니다.");
       }
@@ -32,6 +31,8 @@ const ProfileImageModal: React.FC<ProfileImageModalProps> = ({ setProfileImage, 
     };
 
     const handleDelete = () => {
+      const defaultProfileImage = "/default-profile.png";
+      localStorage.setItem("profileImage", defaultProfileImage);
       setProfileImage(defaultProfileImage);
       closeModal();
     };

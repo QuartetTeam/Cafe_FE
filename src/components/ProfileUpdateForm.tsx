@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 interface ProfileUpdateFormProps {
-  profileImage: string | null;
-  setProfileImage: React.Dispatch<React.SetStateAction<string | null>>;
+  profileImage: File | string | null;
+  setProfileImage: React.Dispatch<React.SetStateAction<File | string | null>>;
   openModal: () => void;
 }
 
@@ -19,9 +19,9 @@ export default function ProfileUpdateForm({
       <div className="flex justify-start">
         <div className="flex items-end gap-2">
           <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
-            {(profileImage || profileImage === "default-profile.png") && !imageError ? (
+            {profileImage && !imageError ? (
               <img
-                src={profileImage || "/default-profile.png"}
+                src={typeof profileImage === "string" ? profileImage : URL.createObjectURL(profileImage)}
                 alt=""
                 className="w-full h-full object-cover"
                 onError={() => setImageError(true)}
