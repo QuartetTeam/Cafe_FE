@@ -3,7 +3,7 @@ import Image from 'next/image';
 import searchIcon from '@images/search_icon.svg';
 import Link from 'next/link';
 
-import CustomSwiper from '../components/swiper/page';
+import CustomSwiper from '@components/swiper/page';
 
 const categoryfields = [
   { id: 1, src: searchIcon, alt: '음료' },
@@ -122,7 +122,6 @@ export default function Home() {
                   <span className="font-semibold">작성자 {i + 1}</span>
                 </div>
                 <span className="font-semibold">카페 이름 {i + 1}</span>
-                <span>영업 시간</span>
                 <span>주소</span>
                 <span>별 갯수</span>
                 <span>일지 내용 일부...</span>
