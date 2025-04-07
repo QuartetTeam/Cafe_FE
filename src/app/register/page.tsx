@@ -12,7 +12,7 @@ const inputfields = [
     label: '메뉴 이미지',
     type: 'file',
     placeholder: '매장의 메뉴 사진을 업로드 해주세요.',
-    multiple: 2,
+    multiple: [{ id: 'menu-1' }, { id: 'menu-2' }],
   },
 ];
 
@@ -41,11 +41,11 @@ export default function registerPage() {
                 {field.id === 7 && <br />}
                 {field.id === 7 && <span className="text-[14px] text-gray-500">(최대 2장)</span>}
               </label>
-              {field.type === 'file' && field.multiple ? (
+              {field.type === 'file' && Array.isArray(field.multiple) ? (
                 <div className="flex flex-col gap-y-[7px]">
-                  {Array.from({ length: field.multiple }, (_, i) => (
+                  {field.multiple.map((item) => (
                     <input
-                      key={i}
+                      key={item.id}
                       className="h-[40px] w-[400px] rounded-[10px] border border-transparent p-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] focus:border-[#c56e14] focus:outline-none"
                       type={field.type}
                       placeholder={field.placeholder}
@@ -84,7 +84,7 @@ export default function registerPage() {
       </div>
 
       <div className="flex items-center justify-center gap-x-[20px]">
-        <button className="h-full w-[180px] cursor-pointer rounded-[20px] px-[5px] py-[8px] font-semibold text-[#C1C1C1] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] ">
+        <button className="h-full w-[180px] cursor-pointer rounded-[20px] px-[5px] py-[8px] font-semibold text-[#C1C1C1] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]">
           다음에 할게요
         </button>
         <button className="h-full w-[120px] cursor-pointer rounded-[20px] bg-[#C56E14] px-[5px] py-[8px] font-semibold text-white">
