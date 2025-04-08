@@ -12,27 +12,36 @@ interface PasswordChangeFormProps {
 }
 
 // 비밀번호 변경 폼 컴포넌트 정의
-const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
+export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
   newPassword,
   setNewPassword,
   confirmPassword,
   setConfirmPassword,
 }) => {
-  const router = useRouter();
   return (
-    <div>
-      {/* 비밀번호 변경 폼 구현 */}
+    <div className="flex justify-center items-start pt-24 min-h-screen bg-white">
+      <PasswordVerification
+        setIsVerified={() => {}} // 인증 상태는 상위에서 제어되지 않으므로 임시 비어있는 함수 전달
+        newPassword={newPassword}
+        setNewPassword={setNewPassword}
+        confirmPassword={confirmPassword}
+        setConfirmPassword={setConfirmPassword}
+      />
     </div>
   );
 };
 
 // 비밀번호 확인 컴포넌트의 props 타입 정의
 interface PasswordVerificationProps {
-  // 다른 props가 있을 경우 추가
+  setIsVerified: React.Dispatch<React.SetStateAction<boolean>>;
+  newPassword: string;
+  setNewPassword: React.Dispatch<React.SetStateAction<string>>;
+  confirmPassword: string;
+  setConfirmPassword: React.Dispatch<React.SetStateAction<string>>;
 }
 
 // 비밀번호 확인 컴포넌트 정의
-const PasswordVerification: React.FC<PasswordVerificationProps> = () => {
+const PasswordVerification: React.FC<PasswordVerificationProps> = ({ setIsVerified, newPassword, setNewPassword, confirmPassword, setConfirmPassword }) => {
   const [showVerificationInput, setShowVerificationInput] = React.useState(false); // 인증 입력란 보이기/숨기기
   const [timer, setTimer] = React.useState(180); // 타이머 상태 (180초)
   const [email, setEmail] = React.useState(""); // 이메일 상태
@@ -87,11 +96,12 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = () => {
         clearInterval(timerRef.current); // 타이머 멈춤
       }
       sessionStorage.setItem("verified", "true"); // 인증 상태 저장
-      
-      // 페이지 이동
-      setTimeout(() => {
-        router.push("/mypage-member1"); // 계정 관리 페이지로 이동
-      }, 100); // 100ms 후 이동
+      setShowVerificationInput(false);
+      setEmail("");
+      setVerificationCode("");
+      setEmailError("");
+      alert("인증이 완료되었습니다.");
+      router.push("/reset-password"); // ✅ 인증 완료 시 직접 이동
     } else {
       // 인증 실패 시
       setEmailError("재인증 하십시오."); // 재인증 메시지
@@ -103,6 +113,14 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = () => {
       alert("인증번호를 다시 발송해주세요.");
     }
   };
+
+  React.useEffect(() => {
+    const verified = sessionStorage.getItem("verified");
+    if (verified === "true") {
+      // 인증 후 자동 이동은 제거 (루프 원인)
+      // router.push("/mypage-member1");
+    }
+  }, []);
 
   return (
     <div className="bg-white p-6 rounded shadow">
@@ -181,5 +199,3 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = () => {
     </div>
   );
 };
-
-export default PasswordVerification;

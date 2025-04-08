@@ -43,11 +43,17 @@ export default function ProfileForm() {
     confirmPassword: false,
   });
 
-  useEffect(() => {
-    const verified = sessionStorage.getItem("verified");
+   useEffect(() => {
+   /* 실제 운영 시에는 아래 주석 해제
+   const verified = sessionStorage.getItem("verified");
     if (verified === "true") {
       setIsVerified(true);
-    }
+    }    */
+
+   // 테스트 중일 경우 무조건 초기화
+      sessionStorage.removeItem("verified");
+      setIsVerified(false);
+    // 테스트 끝나면 위의 2줄 삭제
     setCheckingVerification(false);
   }, []);
 

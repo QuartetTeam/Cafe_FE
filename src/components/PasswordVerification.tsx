@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // react-icons에서 아이콘 임포트
-import PasswordChangeForm from "./PasswordChangeForm";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"; // Heroicons 아이콘 임포트
+import { PasswordChangeForm } from "./PasswordChangeForm"; // default export 제거
 import { useRouter } from "next/navigation";
 
 interface PasswordVerificationProps {
@@ -22,6 +22,8 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
   const [showPassword, setShowPassword] = useState(false);  // 비밀번호 표시 여부
   const [errorMessage, setErrorMessage] = useState(""); // 오류 메시지 상태
   const [isPasswordResetVisible, setIsPasswordResetVisible] = useState(false); // 비밀번호 재설정 모달 상태
+  const [newPassword, setNewPassword] = useState(""); // 새로운 비밀번호 상태 추가
+  const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인 상태 추가
   const router = useRouter();
 
   // 기본 비밀번호 설정
@@ -48,7 +50,7 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
     if (password === correctPassword) {
       sessionStorage.setItem("verified", "true"); // 일시적으로 저장
       setIsVerified(true);
-      router.push("/account-management"); // 인증 성공 시 계정 관리 페이지로 이동
+      router.push("/mypage-member1"); // 인증 성공 시 계정 관리 페이지로 이동
     } else {
       setFailCount((prev) => prev + 1);
     }
@@ -78,7 +80,12 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
   if (isPasswordResetVisible) {
     return (
       <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto mt-24 px-4">
-        <PasswordChangeForm />
+        <PasswordChangeForm
+          newPassword={newPassword}
+          setNewPassword={setNewPassword}
+          confirmPassword={confirmPassword}
+          setConfirmPassword={setConfirmPassword}
+        />
       </div>
     );
   }
@@ -86,26 +93,29 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto mt-24 px-4">
       <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">비밀번호 확인</h2>
-      <div className="relative w-full">
-        <input
-          type={showPassword ? "text" : "password"}
-          value={password}
-          onChange={handlePasswordChange}
-          placeholder="비밀번호"
-          className="w-full h-12 p-2 pr-10 border border-gray-300 rounded mb-4 text-gray-900 text-base"
-          onKeyDown={(e) => e.key === "Enter" && handleSubmit(e)} // Enter 키로 확인 버튼 클릭 설정
-        />
-        <button
-          type="button"
-          onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-700"
-        >
-          {showPassword ? (
-            <AiOutlineEyeInvisible className="w-5 h-5" />
-          ) : (
-            <AiOutlineEye className="w-5 h-5" />
-          )}
-        </button>
+      <div className="w-full mb-4">
+        <label className="block text-sm font-medium text-gray-700 mb-1">비밀번호</label>
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={handlePasswordChange}
+            placeholder="비밀번호"
+            className="w-full h-12 p-2 pr-10 border border-gray-300 rounded text-gray-900 text-base"
+            onKeyDown={(e) => e.key === "Enter" && handleSubmit(e)} // Enter 키로 확인 버튼 클릭 설정
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-700 text-sm"
+          >
+            {showPassword ? (
+              <EyeSlashIcon className="w-5 h-5" />
+            ) : (
+              <EyeIcon className="w-5 h-5" />
+            )}
+          </button>
+        </div>
       </div>
       {errorMessage && (
         <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
