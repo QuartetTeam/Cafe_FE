@@ -4,6 +4,7 @@ import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function MyPageLayout({ children }: { children: React.ReactNode }) {
   const user = {
@@ -54,10 +55,13 @@ export default function MyPageLayout({ children }: { children: React.ReactNode }
         {/* 프로필 이미지 */}
         <div className="flex items-center gap-2">
           {user.profileImageUrl ? (
-            <img
+            <Image
               src={user.profileImageUrl}
               alt="프로필"
-              className="w-6 h-6 rounded-full object-cover"
+              width={24}
+              height={24}
+              className="rounded-full object-cover"
+              style={{ width: "24px", height: "24px" }}
             />
           ) : (
             <div className="w-6 h-6 bg-black text-white rounded-full flex items-center justify-center text-xs">
