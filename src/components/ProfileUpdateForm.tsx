@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 
 interface ProfileUpdateFormProps {
   profileImage: File | string | null;
@@ -20,9 +21,11 @@ export default function ProfileUpdateForm({
         <div className="flex items-end gap-2">
           <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
             {profileImage && !imageError ? (
-              <img
+              <Image
                 src={typeof profileImage === "string" ? profileImage : URL.createObjectURL(profileImage)}
-                alt=""
+                alt="프로필 이미지"
+                width={112}
+                height={112}
                 className="w-full h-full object-cover"
                 onError={() => setImageError(true)}
               />
