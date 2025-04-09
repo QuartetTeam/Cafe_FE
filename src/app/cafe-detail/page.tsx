@@ -6,8 +6,13 @@ import FilledHeart from "@images/heart-fill.png"
 import Bread from "@images/bread.png"
 import Arrow from "@images/arrow-right.png"
 import ReviewSection from "@components/cafe-detail/ReviewSection";
+import {useRouter} from "next/navigation";
 
 const CafeDetail = () => {
+    const router = useRouter();
+    const handlePostClick = () => {
+        router.push('/cafe-detail/store-post');
+    }
     return (
         <>
             <div className={'flex flex-col w-[70%] gap-8'}>
@@ -39,26 +44,31 @@ const CafeDetail = () => {
                 <section className={'flex flex-col gap-4'}>
                     <div className={'flex justify-between items-center'}>
                         <h1 className={'text-[20px] font-bold'}>사장님 게시글</h1>
-                        <p className={'flex gap-1 cursor-pointer'}>게시글 모두 보기 <Image src={Arrow} alt={'arrow'} className={'w-5 h-5'}/></p>
                     </div>
                     <article className={'flex gap-2'}>
                         <div className={'flex flex-col gap-2 w-[235px]'}>
                             <Image src={Bread} alt={'bread'} className={'h-[313px]'}/>
-                            <p className={'flex gap-4 px-[3px] cursor-pointer bg-white drop-shadow-md text-14'}>소담소담 오픈 & 댓글 이벤트
+                            <button className={'flex gap-4 px-[3px] cursor-pointer bg-white drop-shadow-md text-14 transition-colors hover:bg-neutral-100 active:bg-neutral-200'}
+                                    onClick={handlePostClick}>
+                                소담소담 오픈 & 댓글 이벤트
                                 <Image src={Arrow} alt={'arrow'} className={'w-5 h-5'}/>
-                            </p>
+                            </button>
                         </div>
                         <div className={'flex flex-col gap-2 w-[235px]'}>
                             <Image src={Bread} alt={'bread'} className={'h-[313px]'}/>
-                            <p className={'flex gap-4 px-[3px] cursor-pointer bg-white drop-shadow-md text-14'}>소담소담 오픈 & 댓글 이벤트
+                            <button className={'flex gap-4 px-[3px] cursor-pointer bg-white drop-shadow-md text-14 transition-colors hover:bg-neutral-100 active:bg-neutral-200'}
+                                    onClick={handlePostClick}>
+                                소담소담 오픈 & 댓글 이벤트
                                 <Image src={Arrow} alt={'arrow'} className={'w-5 h-5'}/>
-                            </p>
+                            </button>
                         </div>
                         <div className={'flex flex-col gap-2 w-[235px]'}>
                             <Image src={Bread} alt={'bread'} className={'h-[313px]'}/>
-                            <p className={'flex gap-4 px-[3px] cursor-pointer bg-white drop-shadow-md text-14'}>소담소담 오픈 & 댓글 이벤트
+                            <button className={'flex gap-4 px-[3px] cursor-pointer bg-white drop-shadow-md text-14 transition-colors hover:bg-neutral-100 active:bg-neutral-200'}
+                                    onClick={handlePostClick}>
+                                소담소담 오픈 & 댓글 이벤트
                                 <Image src={Arrow} alt={'arrow'} className={'w-5 h-5'}/>
-                            </p>
+                            </button>
                         </div>
                     </article>
                 </section>

@@ -2,12 +2,25 @@
 import React, {useState} from 'react';
 import Image from "next/image";
 import Bread from "@images/bread.png"
+import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 
 const StorePost = () => {
     const [comment, setComment] = useState("");
+    const router = useRouter();
+
     return (
         <div className={'flex flex-col gap-4'}>
-            <h1 className={'text-[24px] font-bold'}>사장님 말씀</h1>
+            <div className="flex items-center gap-2">
+                <button
+                    onClick={() => router.back()}
+                    className={'text-gray-500 hover:text-black transition cursor-pointer'}
+                    aria-label="뒤로가기"
+                >
+                    <ArrowLeft size={24} />
+                </button>
+                <h1 className="text-[24px] font-bold">사장님 말씀</h1>
+            </div>
             <section className={'flex w-[70%] justify-between gap-8'}>
                 <Image src={Bread} alt={'bread'} className={'w-[40%]'}/>
                 <article className={'w-[60%] flex flex-col justify-between'}>
