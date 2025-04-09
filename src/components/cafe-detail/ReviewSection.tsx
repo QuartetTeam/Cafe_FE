@@ -6,6 +6,7 @@ import Image from "next/image";
 import Profile from "@images/profile.png";
 import Bread from "@images/bread.png";
 import FilledHeart from "@images/heart-fill.png";
+import ReviewModal from "@components/cafe-detail/ReviewModal";
 
 const PAGE_SIZE = 5;
 
@@ -28,6 +29,9 @@ const mockReviews: Review[] = Array.from({ length: 37 }, (_, i) => ({
 
 const ReviewSection = () => {
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const handleOpenModal = () => setShowModal(true);
+    const handleCloseModal = () => setShowModal(false);
 
     const totalCount = mockReviews.length;
     const paginatedReviews = mockReviews.slice(
@@ -36,10 +40,11 @@ const ReviewSection = () => {
     );
 
     return (
-        <div className={'flex flex-col gap-12'}>
+        <section className={'flex flex-col gap-12'}>
             <div className={'flex justify-between items-center'}>
                 <h1 className={'text-[20px] font-bold'}>리뷰 {totalCount}</h1>
-                <button className={'text-[16px] text-right text-gray-600 hover:underline cursor-pointer'}>
+                <button className={'text-[16px] text-right text-gray-600 hover:underline cursor-pointer'}
+                        onClick={handleOpenModal}>
                     내 리뷰 작성하기 +
                 </button>
             </div>
@@ -87,7 +92,8 @@ const ReviewSection = () => {
                     onPageChange={(page:number) => setCurrentPage(page)}
                 />
             </div>
-        </div>
+            {showModal && <ReviewModal onClose={handleCloseModal} />}
+        </section>
     );
 };
 
