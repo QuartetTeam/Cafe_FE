@@ -23,6 +23,7 @@ export default function ProfileForm() {
   const router = useRouter();
 
   const [isVerified, setIsVerified] = useState(false);
+  const [checkingVerification, setCheckingVerification] = useState(true);
   const [failCount, setFailCount] = useState(0);
   const [showResetModal, setShowResetModal] = useState(false);
   const [profileImage, setProfileImage] = useState<File | string | null>(null);
@@ -42,21 +43,72 @@ export default function ProfileForm() {
     confirmPassword: false,
   });
 
-  useEffect(() => {
-    const storedImage = localStorage.getItem("profileImage");
-    if (storedImage) {
-      setProfileImage(storedImage);
-    }
-    setFailCount(0);
+   useEffect(() => {
+   /* 실제 운영 시에는 아래 주석 해제
+   const verified = sessionStorage.getItem("verified");
+    if (verified === "true") {
+      setIsVerified(true);
+    }    */
+
+   // 테스트 중일 경우 무조건 초기화
+      sessionStorage.removeItem("verified");
+      setIsVerified(false);
+    // 테스트 끝나면 위의 2줄 삭제
+    setCheckingVerification(false);
   }, []);
+
+  useEffect(() => {
+    if (!confirmPassword) return;
+
+    setErrors((prev: any) => {
+      const updated = { ...prev };
+      if (confirmPassword === newPassword) {
+        delete updated.confirmPassword;
+      } else {
+        updated.confirmPassword = "비밀번호가 맞지 않습니다.";
+      }
+      return updated;
+    });
+  }, [confirmPassword, newPassword]);
+
+  useEffect(() => {
+    if (nickname.trim().length >= 2) {
+      setErrors((prev: any) => {
+        const updated = { ...prev };
+        delete updated.nickname;
+        return updated;
+      });
+    }
+  }, [nickname]);
+
+  useEffect(() => {
+    const digitsOnlyPhone = phone.replace(/\D/g, "");
+    if (digitsOnlyPhone.length === 11) {
+      setErrors((prev: any) => {
+        const updated = { ...prev };
+        delete updated.phone;
+        return updated;
+      });
+    }
+  }, [phone]);
 
   const handleChange = (field: string, value: string) => {
     setTouched((prev) => ({ ...prev, [field]: true }));
+
     if (field === "nickname") setNickname(value);
     if (field === "phone") setPhone(formatPhoneNumber(value));
-    if (field === "newPassword") setNewPassword(value);
-    if (field === "confirmPassword") setConfirmPassword(value);
-    validateForm();
+
+    if (field === "newPassword") {
+      setNewPassword(value);
+    }
+
+    if (field === "confirmPassword") {
+      setConfirmPassword(value);
+    }
+
+    if (field === "nickname" || field === "phone" || field === "newPassword" || field === "confirmPassword") {
+      validateForm();
+    }
   };
 
   const validateForm = () => {
@@ -72,9 +124,6 @@ export default function ProfileForm() {
 
     if (!validatePassword(newPassword)) {
       formErrors.newPassword = "비밀번호는 영문, 숫자, 특수문자 포함 8자 이상이어야 합니다.";
-    }
-    if (newPassword !== confirmPassword) {
-      formErrors.confirmPassword = "비밀번호가 맞지 않습니다.";
     }
     setErrors(formErrors);
   };
@@ -92,6 +141,10 @@ export default function ProfileForm() {
       // }
     }
   };
+
+  if (checkingVerification) {
+    return null; // 인증 상태 확인 중일 때 아무 것도 렌더링하지 않음
+  }
 
   if (!isVerified) {
     return (

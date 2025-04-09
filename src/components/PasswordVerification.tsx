@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"; // Heroicons 아이콘 임포트
-import PasswordChangeForm from "./PasswordChangeForm";
+import { PasswordChangeForm } from "./PasswordChangeForm"; // default export 제거
 import { useRouter } from "next/navigation";
 
 interface PasswordVerificationProps {
@@ -22,6 +22,8 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
   const [showPassword, setShowPassword] = useState(false);  // 비밀번호 표시 여부
   const [errorMessage, setErrorMessage] = useState(""); // 오류 메시지 상태
   const [isPasswordResetVisible, setIsPasswordResetVisible] = useState(false); // 비밀번호 재설정 모달 상태
+  const [newPassword, setNewPassword] = useState(""); // 새로운 비밀번호 상태 추가
+  const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인 상태 추가
   const router = useRouter();
 
   // 기본 비밀번호 설정
@@ -29,9 +31,10 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
 
   // 자동 인증 처리
   useEffect(() => {
-    const isVerified = localStorage.getItem("verified");
+    const isVerified = sessionStorage.getItem("verified");
     if (isVerified === "true") {
       setIsVerified(true); // 인증 처리 후 모달 생략
+      router.push("/mypage-owner"); // 인증 성공 시 계정 관리 페이지로 이동
     }
   }, []);
 
@@ -45,12 +48,9 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (password === correctPassword) {
-      localStorage.setItem("verified", "true"); // 일시적으로 저장
+      sessionStorage.setItem("verified", "true"); // 일시적으로 저장
       setIsVerified(true);
-      router.push("/mypage-owner");
-      setTimeout(() => {
-        localStorage.removeItem("verified"); // 이동 후 verified 제거
-      }, 100); // 페이지 이동 직후 제거
+      router.push("/mypage-owner"); // 인증 성공 시 계정 관리 페이지로 이동
     } else {
       setFailCount((prev) => prev + 1);
     }
@@ -77,34 +77,51 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
     setIsPasswordResetVisible(true); // 비밀번호 재설정 모달 열기
   };
 
-  return (
-    <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-6 md:p-10">
-      <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">비밀번호 확인</h2>
-      <div className="relative w-full">
-        <input
-          type={showPassword ? "text" : "password"}
-          value={password}
-          onChange={handlePasswordChange}
-          placeholder="비밀번호"
-          className="w-full p-2 border border-gray-300 rounded mb-4 text-gray-900"
-          onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)} // Enter 키로 확인 버튼 클릭 설정
+  if (isPasswordResetVisible) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto mt-24 px-4">
+        <PasswordChangeForm
+          newPassword={newPassword}
+          setNewPassword={setNewPassword}
+          confirmPassword={confirmPassword}
+          setConfirmPassword={setConfirmPassword}
         />
-        <button
-          onClick={togglePasswordVisibility}
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-        >
-          {showPassword ? (
-            <EyeSlashIcon className="w-6 h-6" />
-          ) : (
-            <EyeIcon className="w-6 h-6" />
-          )}
-        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto mt-24 px-4">
+      <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">비밀번호 확인</h2>
+      <div className="w-full mb-4">
+        <label className="block text-sm font-medium text-gray-700 mb-1">비밀번호</label>
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={handlePasswordChange}
+            placeholder="비밀번호"
+            className="w-full h-12 p-2 pr-10 border border-gray-300 rounded text-gray-900 text-base"
+            onKeyDown={(e) => e.key === "Enter" && handleSubmit(e)} // Enter 키로 확인 버튼 클릭 설정
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-700 text-sm"
+          >
+            {showPassword ? (
+              <EyeSlashIcon className="w-5 h-5" />
+            ) : (
+              <EyeIcon className="w-5 h-5" />
+            )}
+          </button>
+        </div>
       </div>
       {errorMessage && (
         <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
       )}
       {failCount >= 3 && (
-        <p className="text-red-500 text-sm mb-6">5번 틀리면 비밀번호를 재설정하셔야 합니다.</p> 
+        <p className="text-red-500 text-sm mb-6">5번 틀리면 비밀번호를 재설정하셔야 합니다.</p>
         )/* 3번 틀렸을 때 표시 */}
       <p 
         className="text-[#6F4F37] text-sm mb-6 cursor-pointer underline"
@@ -114,17 +131,10 @@ const PasswordVerification: React.FC<PasswordVerificationProps> = ({
       </p>
       <button
         onClick={handleSubmit}
-        className="w-full sm:w-auto px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
+        className="w-full sm:w-auto px-4 py-2 bg-[#6F4F37] text-white rounded hover:bg-[#5a3f2d] transition duration-300"
       >
         확인
       </button>
-      {isPasswordResetVisible && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <PasswordChangeForm />
-          </div>
-        </div>
-      )}
     </div>
   );
 };
