@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 type FavoriteCafeCardProps = {
   name: string;
@@ -27,10 +28,13 @@ export default function FavoriteCafeCard({
         {isFavorite ? "❤️" : "🖤"}
       </span>
       <div className="h-28 sm:h-36 bg-gray-300">
-        <img
+        <Image
           src={image || "/next.svg"}
           alt={`${name} 대표 이미지`}
+          width={400}
+          height={300}
           className="h-full w-full object-cover"
+          style={{ objectFit: "cover" }}
         />
       </div>
       <div className="p-2 sm:p-4">

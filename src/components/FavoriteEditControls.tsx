@@ -1,4 +1,3 @@
-// 편집 모드에서의 버튼 (전체 선택, 취소, 삭제 )
 import React from "react";
 import { Cafe } from "../types";
 
@@ -22,51 +21,53 @@ export default function FavoriteEditControls({
   setFavorites,
 }: Props) {
   return (
-    <div className="flex flex-wrap items-center justify-end gap-2 mb-2 mt-4">
-      {!isEditing ? (
-        <button
-          onClick={onClick}
-          className="text-sm px-3 py-1 bg-yellow-100 rounded text-black"
-        >
-          편집하기
-        </button>
-      ) : (
-        <div className="flex gap-2">
+    <div className="flex flex-wrap justify-between items-start gap-2 mb-2 mt-4 px-2 sm:px-4 md:px-6">
+      <div className="flex justify-end w-full md:w-auto">
+        {!isEditing ? (
           <button
-            onClick={() => {
-              setIsEditing(false);
-              setSelectedIds([]);
-            }}
-            className="px-3 py-1 bg-gray-500 text-white rounded"
+            onClick={onClick}
+            className="text-xs sm:text-sm md:text-base px-3 py-1 bg-yellow-100 rounded text-black whitespace-nowrap"
           >
-            취소
+            편집하기
           </button>
-          <button
-            onClick={() => {
-              if (selectedIds.length === favorites.length) {
+        ) : (
+          <div className="flex gap-2">
+            <button
+              onClick={() => {
+                setIsEditing(false);
                 setSelectedIds([]);
-              } else {
-                setSelectedIds(favorites.map((cafe) => cafe.id));
-              }
-            }}
-            className="px-3 py-1 bg-blue-500 text-white rounded"
-          >
-            {selectedIds.length === favorites.length ? "전체 해제" : "전체 선택"}
-          </button>
-          <button
-            onClick={() => {
-              setFavorites((prev) =>
-                prev.filter((cafe) => !selectedIds.includes(cafe.id))
-              );
-              setSelectedIds([]);
-              setIsEditing(false);
-            }}
-            className="px-3 py-1 bg-red-500 text-white rounded"
-          >
-            삭제
-          </button>
-        </div>
-      )}
+              }}
+              className="text-xs sm:text-sm md:text-base px-3 py-1 bg-gray-500 text-white rounded"
+            >
+              취소
+            </button>
+            <button
+              onClick={() => {
+                if (selectedIds.length === favorites.length) {
+                  setSelectedIds([]);
+                } else {
+                  setSelectedIds(favorites.map((cafe) => cafe.id));
+                }
+              }}
+              className="text-xs sm:text-sm md:text-base px-3 py-1 bg-blue-500 text-white rounded"
+            >
+              {selectedIds.length === favorites.length ? "전체 해제" : "전체 선택"}
+            </button>
+            <button
+              onClick={() => {
+                setFavorites((prev) =>
+                  prev.filter((cafe) => !selectedIds.includes(cafe.id))
+                );
+                setSelectedIds([]);
+                setIsEditing(false);
+              }}
+              className="text-xs sm:text-sm md:text-base px-3 py-1 bg-red-500 text-white rounded"
+            >
+              삭제
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

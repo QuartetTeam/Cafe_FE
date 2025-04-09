@@ -4,10 +4,12 @@ type Props = {
   onSelect: (category: string) => void;
 };
 
+import Image from "next/image";
+
 export default function CategoryFilter({ categories, selected, onSelect }: Props) {
   return (
     <div className="w-full flex justify-center">
-      <div className="flex flex-wrap justify-center gap-3 mb-4">
+      <div className="flex flex-nowrap justify-center gap-3 mb-4 overflow-x-auto">
         {categories.map((category) => (
           <button
             key={category}
@@ -16,9 +18,11 @@ export default function CategoryFilter({ categories, selected, onSelect }: Props
               selected === category ? 'shadow-inner border border-gray-400' : ''
             }`}
           >
-            <img
-              src="/search.png"
+            <Image
+              src="/image/search.png"
               alt="category icon"
+              width={48}
+              height={48}
               className="w-10 h-10 sm:w-12 sm:h-12 mt-2"
             />
             <span className="mt-2">{category}</span>

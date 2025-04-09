@@ -1,4 +1,3 @@
-// 즐겨찾기 리스트 출력 + 카드 감싸는 로직
 import React from "react";
 import { Cafe } from "../types";
 import FavoriteCafeCard from "./FavoriteCafeCard";
@@ -33,14 +32,14 @@ export default function FavoriteCafeList({
   };
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
       {cafes.map((cafe) => (
         <div
           key={cafe.id}
           onClick={() => handleCardClick(cafe.id)}
           className={`relative rounded-xl transition cursor-pointer overflow-hidden border ${
             isEditing && selectedIds.includes(cafe.id)
-              ? "border-2 border-blue-500 bg-gray-100"
+              ? "border-2 border-[#A0522D] bg-gray-100"
               : "border-transparent bg-white"
           }`}
         >

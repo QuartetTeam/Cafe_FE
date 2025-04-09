@@ -32,10 +32,13 @@ export default function FavoritesPage() {
   // 필터 적용
   useEffect(() => {
     const filtered = selectedCategory
-      ? favorites.filter((cafe) => cafe.category === selectedCategory)
-      : favorites;
+      ? favorites.filter((cafe) => cafe.isFavorite && cafe.category === selectedCategory)
+      : favorites.filter((cafe) => cafe.isFavorite);
     setFilteredFavorites(filtered);
-    setCurrentPage(1); // 필터 바뀌면 첫 페이지로 이동
+
+    if (!isEditing) {
+      setCurrentPage(1); // 필터 바뀌면 첫 페이지로 이동 (편집 중이 아닐 때만)
+    }
   }, [favorites, selectedCategory]);
 
   // 페이지네이션 적용
@@ -78,36 +81,43 @@ export default function FavoritesPage() {
   };
 
   return (
-    <div className="px-4 sm:px-6 md:px-10 py-6 sm:py-8">
-      <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-        <FavoriteEditControls
-          onClick={() => setIsEditing(true)}
-          isEditing={isEditing}
-          selectedIds={selectedIds}
-          favorites={favorites}
-          setSelectedIds={setSelectedIds}
-          setIsEditing={setIsEditing}
-          setFavorites={setFavorites}
-        />
-        <div className="w-full flex justify-center md:justify-end">
+    <div className="px-4 sm:px-6 md:px-10 py-6 sm:py-8 pt-[64px]">
+        {/* 왼쪽: 카테고리 필터 */}
+        <div className="mb-4">
+        <div className="relative flex justify-center items-start">
           <CategoryFilter
             categories={categories}
             selected={selectedCategory}
             onSelect={handleFilterClick}
           />
+            <div className="absolute -top-10 right-0 sm:-top-20">
+            <FavoriteEditControls
+              onClick={() => setIsEditing(true)}
+              isEditing={isEditing}
+              selectedIds={selectedIds}
+              favorites={favorites}
+              setSelectedIds={setSelectedIds}
+              setIsEditing={setIsEditing}
+              setFavorites={setFavorites}
+            />
+          </div>
         </div>
-        <div className="text-sm flex justify-end">
-          <label htmlFor="perPage" className="mr-2 text-black">표시 개수:</label>
-          <select
-            id="perPage"
-            value={perPage}
-            onChange={handlePerPageChange}
-            className="border border-gray-300 rounded px-2 py-1 text-black"
-          >
-            {[5, 10, 20, 40].map((count) => (
-              <option key={count} value={count}>{count}개</option>
-            ))}
-          </select>
+
+        {/* 오른쪽: 표시 개수 */}
+        <div className="mt-4 flex justify-end">
+          <div className="text-sm flex items-center gap-2 whitespace-nowrap">
+            <label htmlFor="perPage" className="text-black">표시 개수:</label>
+            <select
+              id="perPage"
+              value={perPage}
+              onChange={handlePerPageChange}
+              className="border border-gray-300 rounded px-2 py-1 text-black"
+            >
+              {[5, 10, 20, 40].map((count) => (
+                <option key={count} value={count}>{count}개</option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 

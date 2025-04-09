@@ -27,12 +27,12 @@ export default function SearchResultsPage() {
   const paginatedData = filtered.slice((currentPage - 1) * perPage, currentPage * perPage);
 
   return (
-    <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-white text-black min-h-screen">
-      <h2 className="text-xl font-bold mb-6">
+    <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-8 bg-white text-black min-h-screen">
+      <h2 className="text-lg sm:text-xl font-bold mb-6">
         "{keyword}"에 대한 검색 결과
       </h2>
 
-      <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-end gap-2">
+      <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-end gap-2 flex-nowrap">
         <label htmlFor="perPage" className="font-medium">표시 개수:</label>
         <select
           id="perPage"
@@ -41,7 +41,7 @@ export default function SearchResultsPage() {
             setPerPage(Number(e.target.value));
             setCurrentPage(1);
           }}
-          className="border px-2 py-1 rounded"
+          className="border px-2 py-1 rounded whitespace-nowrap"
         >
           {[5, 10, 20, 40].map((count) => (
             <option key={count} value={count}>
@@ -54,7 +54,7 @@ export default function SearchResultsPage() {
       {paginatedData.length === 0 ? (
         <p className="font-bold text-gray-900">검색 결과가 없습니다.</p>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {paginatedData.map((cafe) => (
             <FavoriteCafeCard
               key={cafe.id}
@@ -75,7 +75,7 @@ export default function SearchResultsPage() {
             <button
               key={index}
               onClick={() => setCurrentPage(index + 1)}
-              className={`px-3 py-1 rounded border ${
+              className={`px-2 py-1 sm:px-3 sm:py-1.5 rounded border ${
                 currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-white text-black'
               }`}
             >

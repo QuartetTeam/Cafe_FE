@@ -17,7 +17,7 @@ type Props = {
 
 export default function FavoriteSortButtons({ cafe, moveCafe }: Props) {
   return (
-    <div className="absolute bottom-2 right-2 z-10 flex flex-col gap-0.5 sm:gap-1 text-xs sm:text-sm font-semibold text-blue-700">
+    <div className="absolute bottom-2 right-2 z-10 flex flex-col gap-0.5 sm:gap-1 text-xs sm:text-sm md:text-base font-semibold text-[#B0703A]">
       <button
         onClick={(e) => {
           e.stopPropagation();
