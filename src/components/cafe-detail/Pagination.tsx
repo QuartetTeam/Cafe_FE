@@ -53,7 +53,7 @@ const Pagination = ({totalCount, pageSize, currentPage, onPageChange}: Paginatio
                 <button
                     key={page}
                     className={`px-3 py-1 text-sm rounded ${
-                        page === currentPage ? "bg-blue-500 text-white" : "hover:bg-gray-100"
+                        page === currentPage ? "bg-orange-600 text-white" : "hover:bg-gray-100"
                     }`}
                     onClick={() => onPageChange(page)}
                 >
