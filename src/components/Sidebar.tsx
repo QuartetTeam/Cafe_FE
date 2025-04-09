@@ -51,7 +51,7 @@ const Sidebar = ({ isOpen, onClose, className }: SidebarProps) => {
           <ul className="space-y-5 text-sm sm:text-sm md:text-base text-center">
             <li>
               <Link
-                href="http://localhost:3000/mypage-member1"
+                href="/mypage-member1"
                 className={`block text-center w-full text-gray-700 hover:text-[#a66a2d] ${
                   pathname === "/mypage-member1" ? "font-bold text-black" : ""
                 }`}
@@ -62,7 +62,7 @@ const Sidebar = ({ isOpen, onClose, className }: SidebarProps) => {
             </li>
             <li>
               <Link
-                href="http://localhost:3000/favorites"
+                href="/favorites"
                 className="block text-center w-full text-gray-700 hover:text-[#a66a2d]"
                 onClick={onClose}
               >
