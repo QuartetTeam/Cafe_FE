@@ -2,9 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import WithdrawalModal from "./WithdrawalModal";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 
 interface SidebarProps {
@@ -16,20 +13,6 @@ interface SidebarProps {
 const Sidebar = ({ isOpen, onClose, className }: SidebarProps) => {
   const pathname = usePathname();
   const router = useRouter();
-  const [isWithdrawalModalOpen, setIsWithdrawalModalOpen] = useState(false);
-
-  const handleWithdraw = async () => {
-    try {
-      await axios.delete("/api/user"); // 실제 탈퇴 API 주소로 교체 필요
-      alert("회원 탈퇴가 완료되었습니다.");
-      router.push("/");
-    } catch (err) {
-      console.error("탈퇴 실패:", err);
-      alert("탈퇴 처리 중 오류가 발생했습니다.");
-    } finally {
-      setIsWithdrawalModalOpen(false);
-    }
-  };
 
   return (
     <>
@@ -71,9 +54,9 @@ const Sidebar = ({ isOpen, onClose, className }: SidebarProps) => {
             </li>
             <li>
               <Link
-                href="/mypage-member1/diary"
+                href="/visit-record"
                 className={`block text-center w-full text-gray-700 hover:text-[#a66a2d] ${
-                  pathname.startsWith("/mypage-member1/diary") ? "font-bold text-black" : ""
+                  pathname.startsWith("/visit-record") ? "font-bold text-black" : ""
                 }`}
                 onClick={onClose}
               >
@@ -82,23 +65,7 @@ const Sidebar = ({ isOpen, onClose, className }: SidebarProps) => {
             </li>
           </ul>
         </div>
-        {pathname === "/mypage-member1" && (
-          <div className="p-6">
-            <button
-              className="text-sm hover:text-[#a66a2d]"
-              onClick={() => setIsWithdrawalModalOpen(true)}
-            >
-              회원탈퇴
-            </button>
-          </div>
-        )}
       </aside>
-      {isWithdrawalModalOpen && (
-        <WithdrawalModal
-          closeModal={() => setIsWithdrawalModalOpen(false)}
-          onConfirm={handleWithdraw}
-        />
-      )}
     </>
   );
 };
