@@ -23,7 +23,7 @@ const categoryData = [
   },
 ];
 
-export default function CategoryList() {
+const CategoryList = () => {
   const [mainCategory, setMainCategory] = useState<string>('음료');
   const [subCategory, setSubCategory] = useState<string[]>([
     '스페셜티 커피',
@@ -97,4 +97,6 @@ export default function CategoryList() {
       </div>
     )
   );
-}
+};
+
+export default CategoryList;
