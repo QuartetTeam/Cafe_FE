@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -12,15 +12,45 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/*@media (prefers-color-scheme: dark) {*/
+/*  :root {*/
+/*    --background: #0a0a0a;*/
+/*    --foreground: #ededed;*/
+/*  }*/
+/*}*/
 
 body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.swiper {
+  position: static !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: black !important;
+  width: 40px !important;
+  height: 40px !important;
+  top: 70% !important;
+  z-index: 10;
+}
+
+.swiper-button-prev {
+  left: -75px !important;
+}
+
+.swiper-button-next {
+  right: -75px !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 28px !important;
+  font-weight: 900 !important;
 }

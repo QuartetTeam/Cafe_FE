@@ -1,103 +1,135 @@
-import Image from "next/image";
+'use client';
+import Image from 'next/image';
+import searchIcon from '@images/search_icon.svg';
+import Link from 'next/link';
+
+import CustomSwiper from '@components/swiper/page';
+
+const categoryfields = [
+  { id: 1, src: searchIcon, alt: '음료' },
+  { id: 2, src: searchIcon, alt: '디저트 / 베이커리' },
+  { id: 3, src: searchIcon, alt: '브런치' },
+  { id: 4, src: searchIcon, alt: '무드' },
+];
+
+const CafesExamples = [
+  {
+    id: 1,
+    image: '/next.svg',
+    name: '카페 A',
+    address: '부산 서면',
+    date: '10:00~12:00',
+    starCount: '⭐⭐⭐⭐⭐',
+    reviewCount: 99,
+  },
+  {
+    id: 2,
+    image: '/next.svg',
+    name: '카페 B',
+    address: '부산 광안리',
+    date: '10:00~12:00',
+    starCount: '⭐⭐⭐⭐⭐',
+    reviewCount: 99,
+  },
+  {
+    id: 3,
+    image: '/next.svg',
+    name: '카페 C',
+    address: '부산 해운대',
+    date: '10:00~12:00',
+    starCount: '⭐⭐⭐⭐⭐',
+    reviewCount: 99,
+  },
+  {
+    id: 4,
+    image: '/next.svg',
+    name: '카페 C',
+    address: '부산 해운대',
+    date: '10:00~12:00',
+    starCount: '⭐⭐⭐⭐⭐',
+    reviewCount: 99,
+  },
+  {
+    id: 5,
+    image: '/next.svg',
+    name: '카페 C',
+    address: '부산 해운대',
+    date: '10:00~12:00',
+    starCount: '⭐⭐⭐⭐⭐',
+    reviewCount: 99,
+  },
+  {
+    id: 6,
+    image: '/next.svg',
+    name: '카페 C',
+    address: '부산 해운대',
+    date: '10:00~12:00',
+    starCount: '⭐⭐⭐⭐⭐',
+    reviewCount: 99,
+  },
+];
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <div className="mx-auto flex max-w-[1200px] flex-col gap-y-[60px] px-[100px] py-[50px]">
+      <div className="relative">
+        <input
+          placeholder="어떤 카페를 찾고 있나요?"
+          type="text"
+          className="w-full rounded-[20px] px-[20px] py-[10px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] focus:outline-none"
         />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <Image
+          src={searchIcon}
+          alt="검색"
+          width={18}
+          height={16}
+          className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
+        />
+      </div>
+      <section className="flex items-center justify-around">
+        {categoryfields.map((field) => (
+          <div key={field.id} className="flex flex-col items-center gap-y-[15px]">
+            <Link href="/">
+              <Image src={field.src} alt={field.alt} width={200} height={200} />
+            </Link>
+            <span className="text-[18px]">{field.alt}</span>
+          </div>
+        ))}
+      </section>
+      <section className="flex flex-col gap-y-[20px]">
+        <span className="text-[20px] font-semibold">지금, 인기있는 카페</span>
+        <CustomSwiper cafes={CafesExamples} />
+      </section>
+      <section className="flex flex-col gap-y-[20px]">
+        <span className="text-[20px] font-semibold">지금, 가장 가까운 카페</span>
+        <CustomSwiper cafes={CafesExamples} />
+      </section>
+      <section className="flex flex-col gap-y-[20px]">
+        <span className="text-[20px] font-semibold">지금, 많이 보는 카페일지</span>
+        <div className="grid grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5, 6].map((_, i) => (
+            <div key={i} className="rounded-[20px] bg-white p-4 shadow-lg hover:scale-110 cursor-pointer">
+              <Image
+                src={'/next.svg'}
+                alt="일지 소개"
+                width={300}
+                height={200}
+                className="rounded-[20px]"
+              />
+              <div className="mt-3 flex flex-col">
+                <div className="flex items-center gap-x-[6px]">
+                  <Image src={'/next.svg'} alt="작성자 프로필" width={20} height={20} />
+                  <span className="font-semibold">작성자 {i + 1}</span>
+                </div>
+                <span className="font-semibold">카페 이름 {i + 1}</span>
+                <span>주소</span>
+                <span>별 갯수</span>
+                <span>일지 내용 일부...</span>
+              </div>
+            </div>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
     </div>
   );
 }
