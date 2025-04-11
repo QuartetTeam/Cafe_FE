@@ -16,7 +16,7 @@ const inputfields = [
   },
 ];
 
-export default function registerPage() {
+const RegisterPage = () => {
   return (
     <div className="mx-auto flex max-w-[1200px] flex-col gap-y-[40px] p-[50px]">
       <div>
@@ -93,4 +93,6 @@ export default function registerPage() {
       </div>
     </div>
   );
-}
+};
+
+export default RegisterPage;
