@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <header className="fixed top-0 flex w-full justify-between bg-white px-[70px] py-[16px] shadow-md z-99">
           <nav className="flex items-center gap-x-[55px]">
