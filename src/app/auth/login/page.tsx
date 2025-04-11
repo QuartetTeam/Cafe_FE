@@ -23,7 +23,7 @@ const socialIcons = [
   { src: google, alt: '구글' },
 ];
 
-export default function LoginPage() {
+const LoginPage = () => {
   return (
     <div className="mx-auto flex max-w-[640px] flex-col items-center px-[48px] pt-[140px]">
       <div className="mb-[40px] flex flex-col items-center gap-y-[7px]">
@@ -70,4 +70,6 @@ export default function LoginPage() {
       </div>
     </div>
   );
-}
+};
+
+export default LoginPage;

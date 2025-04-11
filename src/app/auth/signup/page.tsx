@@ -27,7 +27,7 @@ const inputfields = [
   },
 ];
 
-export default function SignupPage() {
+const SignupPage = () => {
   const [step, setStep] = useState<number>(1);
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
   const [image, setImage] = useState<string | null>(null);
@@ -149,4 +149,6 @@ export default function SignupPage() {
       )}
     </>
   );
-}
+};
+
+export default SignupPage;
