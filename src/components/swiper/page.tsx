@@ -17,7 +17,7 @@ interface CustomSwiperProps {
   }[];
 }
 
-export default function CustomSwiper({ cafes }: CustomSwiperProps) {
+const CustomSwiper = ({ cafes }: CustomSwiperProps) => {
   return (
     <div className="relative cursor-pointer">
       <Swiper
@@ -50,4 +50,6 @@ export default function CustomSwiper({ cafes }: CustomSwiperProps) {
       </Swiper>
     </div>
   );
-}
+};
+
+export default CustomSwiper;

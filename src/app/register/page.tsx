@@ -1,4 +1,7 @@
+'use client';
+import CategoryList from '@components/Modal/CategoryList/page';
 import Image from 'next/image';
+import { useState } from 'react';
 
 const inputfields = [
   { id: 1, label: '상호명', type: 'text', placeholder: '상호명을 입력해주세요.' },
@@ -17,11 +20,16 @@ const inputfields = [
 ];
 
 const RegisterPage = () => {
+  const [categoryModal, setCategoryModal] = useState(false);
+
+  const handleCategoryModalClick = () => {
+    setCategoryModal(!categoryModal);
+  };
+
   return (
     <div className="mx-auto flex max-w-[1200px] flex-col gap-y-[40px] p-[50px]">
-      <div>
-        <h1 className="text-[30px]">매장을 등록해주세요!</h1>
-      </div>
+      {categoryModal && <CategoryList />}
+      <h1 className="text-[30px]">매장을 등록해주세요!</h1>
       <div className="flex items-center justify-between">
         <section className="flex flex-col gap-y-[30px]">
           <Image src={'/next.svg'} alt="대표 이미지" width={450} height={300} />
@@ -67,7 +75,10 @@ const RegisterPage = () => {
               <span className="text-[15px] font-semibold">분야</span>
               <span className="text-[14px] font-semibold text-gray-500">(중복 가능)</span>
             </div>
-            <button className="w-[80px] cursor-pointer rounded-[20px] bg-[#846245] px-[5px] py-[8px] text-white">
+            <button
+              className="w-[80px] cursor-pointer rounded-[20px] bg-[#846245] px-[5px] py-[8px] text-white"
+              onClick={handleCategoryModalClick}
+            >
               선택
             </button>
           </div>
