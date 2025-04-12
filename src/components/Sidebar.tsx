@@ -19,7 +19,7 @@ const Sidebar = ({ isOpen, onClose, className }: SidebarProps) => {
       {/* 오버레이 - 모바일에서 사이드바 열릴 때만 표시 */}
       {isOpen && (
         <div
-          className="fixed top-0 left-0 w-screen h-screen bg-black/50 z-30 md:hidden"
+          className="fixed top-0 left-0 w-screen h-screen bg-black/50 z-10 md:hidden"
           onClick={onClose}
         />
       )}

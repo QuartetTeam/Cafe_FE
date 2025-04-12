@@ -17,7 +17,7 @@ export default function MyPageLayout({ children }: { children: React.ReactNode }
   const closeSidebar = () => setIsSidebarOpen(false);
 
   return (
-    <div className="h-screen bg-white flex flex-col overflow-hidden">
+    <div className="relative z-[1] h-screen bg-white flex flex-col overflow-hidden">
       {/* 상단 네비게이션 */}
       <header
         className={`flex justify-between items-center px-4 sm:px-10 py-4 border-b z-30 fixed top-0 left-0 w-full transition-colors duration-300 backdrop-blur-sm ${
@@ -74,14 +74,14 @@ export default function MyPageLayout({ children }: { children: React.ReactNode }
       <div className="relative flex flex-1 overflow-hidden">
         {/* 사이드바 열렸을 때 어두운 배경 */}
         {isSidebarOpen && (
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 md:hidden" />
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-10 md:hidden" />
         )}
 
         <main className="flex flex-1 overflow-hidden">
           <Sidebar
             isOpen={isSidebarOpen}
             onClose={closeSidebar}
-            className={`bg-white z-40 flex flex-col justify-between transition-transform duration-300 transform
+            className={`bg-white z-20 flex flex-col justify-between transition-transform duration-300 transform
               fixed top-0 left-0 h-full w-[200px]
               md:fixed md:top-[64px] md:h-[calc(100vh-64px)]
               ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
