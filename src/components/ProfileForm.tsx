@@ -148,7 +148,7 @@ const ProfileForm = () => {
       // TODO: 여기에 실제 API 요청 또는 로컬 저장 로직 추가
       // 예: await fetch('/api/update-profile', { method: 'POST', body: JSON.stringify(profileData) });
 
-      // router.push("/mypage-member1"); // 저장 후 이동 가능
+      // router.push("/mypage-owner"); // 저장 후 이동 가능
     }
   };
 
