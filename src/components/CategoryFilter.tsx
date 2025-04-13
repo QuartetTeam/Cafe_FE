@@ -6,7 +6,7 @@ type Props = {
 
 import Image from "next/image";
 
-export default function CategoryFilter({ categories, selected, onSelect }: Props) {
+const CategoryFilter = ({ categories, selected, onSelect }: Props) => {
   return (
     <div className="w-full flex justify-center">
       <div className="flex flex-nowrap justify-center gap-3 mb-4 overflow-x-auto">
@@ -32,3 +32,5 @@ export default function CategoryFilter({ categories, selected, onSelect }: Props
     </div>
   );
 }
+
+export default CategoryFilter;

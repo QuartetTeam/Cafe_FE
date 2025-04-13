@@ -10,14 +10,14 @@ type FavoriteCafeCardProps = {
   onToggleFavorite: () => void;
 };
 
-export default function FavoriteCafeCard({
+const FavoriteCafeCard = ({
   name,
   image,
   time,
   location,
   isFavorite,
   onToggleFavorite,
-}: FavoriteCafeCardProps) {
+}: FavoriteCafeCardProps) => {
   return (
     <div className="rounded-xl bg-white shadow-md relative w-full p-2 sm:p-4 overflow-hidden">
       <span
@@ -44,4 +44,6 @@ export default function FavoriteCafeCard({
       </div>
     </div>
   );
-}
+};
+
+export default FavoriteCafeCard;

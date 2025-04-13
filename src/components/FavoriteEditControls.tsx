@@ -11,7 +11,7 @@ type Props = {
   setFavorites: React.Dispatch<React.SetStateAction<Cafe[]>>;
 };
 
-export default function FavoriteEditControls({
+const FavoriteEditControls = ({
   onClick,
   isEditing,
   selectedIds,
@@ -19,7 +19,7 @@ export default function FavoriteEditControls({
   setSelectedIds,
   setIsEditing,
   setFavorites,
-}: Props) {
+}: Props) => {
   return (
     <div className="flex flex-wrap justify-between items-start gap-2 mb-2 mt-4 px-2 sm:px-4 md:px-6">
       <div className="flex justify-end w-full md:w-auto">
@@ -70,4 +70,6 @@ export default function FavoriteEditControls({
       </div>
     </div>
   );
-}
+};
+
+export default FavoriteEditControls;

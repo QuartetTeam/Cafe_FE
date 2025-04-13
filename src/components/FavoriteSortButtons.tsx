@@ -1,4 +1,3 @@
-// 순서 조정 버튼 (위로, 아래로) - 개별 카드 적용
 import React from "react";
 
 type Cafe = {
@@ -15,7 +14,7 @@ type Props = {
   moveCafe: (id: number, direction: "up" | "down") => void; // 전체 favorites 배열 기준으로 동작
 };
 
-export default function FavoriteSortButtons({ cafe, moveCafe }: Props) {
+const FavoriteSortButtons = ({ cafe, moveCafe }: Props) => {
   return (
     <div className="absolute bottom-2 right-2 z-10 flex flex-col gap-0.5 sm:gap-1 text-xs sm:text-sm md:text-base font-semibold text-[#B0703A]">
       <button
@@ -36,4 +35,6 @@ export default function FavoriteSortButtons({ cafe, moveCafe }: Props) {
       </button>
     </div>
   );
-}
+};
+
+export default FavoriteSortButtons;

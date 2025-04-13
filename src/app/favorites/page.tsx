@@ -18,7 +18,7 @@ const generateDummyFavorites = (): Cafe[] => (
   }))
 );
 
-export default function FavoritesPage() {
+const FavoritesPage = () => {
   const [favorites, setFavorites] = useState<Cafe[]>(generateDummyFavorites());
   const [filteredFavorites, setFilteredFavorites] = useState<Cafe[]>(favorites);
   const [paginatedData, setPaginatedData] = useState<Cafe[]>([]);
@@ -146,4 +146,6 @@ export default function FavoritesPage() {
       </div>
     </div>
   );
-}
+};
+
+export default FavoritesPage;

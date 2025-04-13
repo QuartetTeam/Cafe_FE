@@ -13,7 +13,7 @@ type Props = {
     moveCafe: (id: number, direction: "up" | "down") => void; // 카페 이동 함수
 };
 
-export default function FavoriteCafeList({
+const FavoriteCafeList = ({
   cafes,
   isEditing,
   selectedIds,
@@ -21,7 +21,7 @@ export default function FavoriteCafeList({
   toggleFavorite,
   setFavorites,
   moveCafe,
-}: Props) {
+}: Props) => {
   const handleCardClick = (id: number) => {
     if (!isEditing) return;
     if (selectedIds.includes(id)) {
@@ -62,3 +62,5 @@ export default function FavoriteCafeList({
     </div>
   );
 }
+
+export default FavoriteCafeList;

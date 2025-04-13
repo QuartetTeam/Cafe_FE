@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';  
 import FavoriteCafeCard from '../../components/FavoriteCafeCard';  
 
-export default function FavoritesLayout({ children }: { children: ReactNode }) {
+const FavoritesLayout = ({ children }: { children: ReactNode }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const pathname = usePathname();  
 
@@ -63,4 +63,6 @@ export default function FavoritesLayout({ children }: { children: ReactNode }) {
       </div>
     </MyPageLayout>
   );
-}
+};
+
+export default FavoritesLayout;

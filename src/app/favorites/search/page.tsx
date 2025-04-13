@@ -13,7 +13,7 @@ const dummyFavorites = Array.from({ length: 32 }, (_, i) => ({
   isFavorite: true,
 }));
 
-export default function SearchResultsPage() {
+const SearchResultsPage = () => {
   const searchParams = useSearchParams();
   const keyword = searchParams.get('q') || '';
   const [perPage, setPerPage] = useState(10);
@@ -87,3 +87,5 @@ export default function SearchResultsPage() {
     </div>
   );
 }
+
+export default SearchResultsPage;
