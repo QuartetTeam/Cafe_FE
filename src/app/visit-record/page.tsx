@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import CafeRecordCard from "@components/CafeRecordCard";
 import VisitRecordHeader from "@components/VisitRecord/VisitRecordHeader";
-import Modal from "@components/Modal"; // Import the Modal component
+import Modal from "@components/Modal/Modal"; // Import the Modal component
 import CafeDetailModal from "@components/CafeDetailModal"; // Import CafeDetailModal component
-import { extractRepresentativeImageUrlFromHTML } from "@components/Modal"; // Import the utility function
+import { extractRepresentativeImageUrlFromHTML } from "@components/Modal/utils"; // Import the utility function
 
 interface CafeRecord { // Define CafeRecord interface
   imageUrl: string;
@@ -17,7 +17,7 @@ interface CafeRecord { // Define CafeRecord interface
   createdAt: string;
 }
 
-export default function VisitRecordPage() {
+const VisitRecordPage = () => {
   const nickname = "";
   const profileImage = "";
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
@@ -145,3 +145,5 @@ export default function VisitRecordPage() {
   </div>
   );
 }
+
+export default VisitRecordPage;

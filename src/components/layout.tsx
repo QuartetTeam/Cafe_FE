@@ -5,7 +5,7 @@ import Sidebar from "@components/Sidebar";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function MyPageLayout({ children }: { children: React.ReactNode }) {
+const MyPageLayout = ({ children }: { children: React.ReactNode }) => {
   const user = {
     name: "서은",
     profileImageUrl: "", // 프로필 사진 URL로 대체
@@ -91,4 +91,6 @@ export default function MyPageLayout({ children }: { children: React.ReactNode }
       </div>
     </div>
   );
-}
+};
+
+export default MyPageLayout;

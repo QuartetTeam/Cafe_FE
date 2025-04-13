@@ -11,7 +11,7 @@ interface VisitRecordHeaderProps {
   setCurrentMonth: (month: number) => void;
 }
 
-export default function VisitRecordHeader({ nickname, profileImage, cafeRecords, currentMonth, setCurrentMonth }: VisitRecordHeaderProps) {
+const VisitRecordHeader = ({ nickname, profileImage, cafeRecords, currentMonth, setCurrentMonth }: VisitRecordHeaderProps) => {
   const handlePreviousMonth = () => {
     setCurrentMonth(currentMonth - 1);
   };
@@ -47,4 +47,6 @@ export default function VisitRecordHeader({ nickname, profileImage, cafeRecords,
       </div>
     </section>
   );
-}
+};
+
+export default VisitRecordHeader;
