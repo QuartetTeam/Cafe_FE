@@ -19,7 +19,7 @@ const Sidebar = ({ isOpen, onClose, className }: SidebarProps) => {
       {/* 오버레이 - 모바일에서 사이드바 열릴 때만 표시 */}
       {isOpen && (
         <div
-          className="fixed top-0 left-0 w-screen h-screen bg-black/50 z-10 md:hidden"
+          className="fixed top-0 left-0 w-screen h-screen bg-black/50 z-30 md:hidden"
           onClick={onClose}
         />
       )}
@@ -34,9 +34,9 @@ const Sidebar = ({ isOpen, onClose, className }: SidebarProps) => {
           <ul className="space-y-5 text-sm sm:text-sm md:text-base text-center">
             <li>
               <Link
-                href="/mypage-member1"
+                href="/mypage-owner"
                 className={`block text-center w-full text-gray-700 hover:text-[#a66a2d] ${
-                  pathname === "/mypage-member1" ? "font-bold text-black" : ""
+                  pathname === "/mypage-owner" ? "font-bold text-black" : ""
                 }`}
                 onClick={onClose}
               >
@@ -45,22 +45,24 @@ const Sidebar = ({ isOpen, onClose, className }: SidebarProps) => {
             </li>
             <li>
               <Link
-                href="/favorites"
-                className="block text-center w-full text-gray-700 hover:text-[#a66a2d]"
+                href="/store-owner"
+                className={`block text-center w-full text-gray-700 hover:text-[#a66a2d] ${
+                  pathname === "/store-owner" ? "font-bold text-black" : ""
+                }`}
                 onClick={onClose}
               >
-                즐겨찾기
+                매장 정보 수정
               </Link>
             </li>
             <li>
               <Link
-                href="/visit-record"
+                href="/manage-owner"
                 className={`block text-center w-full text-gray-700 hover:text-[#a66a2d] ${
-                  pathname.startsWith("/visit-record") ? "font-bold text-black" : ""
+                  pathname.startsWith("/mypage-owner/manage") ? "font-bold text-black" : ""
                 }`}
                 onClick={onClose}
               >
-                카페 일지
+                매장 관리
               </Link>
             </li>
           </ul>
