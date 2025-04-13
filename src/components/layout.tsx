@@ -1,7 +1,7 @@
 "use client"; // 클라이언트 컴포넌트로 설정
 
 import { useState } from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "@components/Sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import PasswordVerification from "../components/PasswordVerification";
-import ProfileImageModal from "../components/ProfileImageModal";
+import PasswordVerification from "@components/PasswordVerification";
+import ProfileImageModal from "@components/ProfileImageModal";
 import ProfileUpdateForm from "./ProfileUpdateForm";
 import ProfileEditor from './ProfileEditor';
 import { FiEye, FiEyeOff } from "react-icons/fi";
@@ -32,6 +32,7 @@ const ProfileForm = () => {
   const [phone, setPhone] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -133,13 +134,21 @@ const ProfileForm = () => {
     e.preventDefault();
     validateForm();
     if (Object.keys(errors).length === 0) {
-      console.log("변경사항 저장됨"); // 여기에 실제 제출 로직을 연결할 수 있음, 현재는 로그로만 확인
-      // 나중에 이전 페이지로 이동하려면 아래 주석 해제 - 무조건 이전 페이지로 이동, 이전 페이지 없으면 홈으로
-      // if (typeof window !== "undefined" && window.history.length > 1) {
-      //   router.back();
-      // } else {
-      //   router.push("/mypage-owner");
-      // }
+      const profileData = {
+        nickname,
+        phone,
+        currentPassword,
+        newPassword,
+        confirmPassword,
+        profileImage,
+      };
+
+      console.log("변경사항 저장됨:", profileData);
+
+      // TODO: 여기에 실제 API 요청 또는 로컬 저장 로직 추가
+      // 예: await fetch('/api/update-profile', { method: 'POST', body: JSON.stringify(profileData) });
+
+      // router.push("/mypage-member1"); // 저장 후 이동 가능
     }
   };
 
@@ -175,8 +184,8 @@ const ProfileForm = () => {
           setNickname={setNickname}
           phoneNumber={phone}
           setPhoneNumber={setPhone}
-          currentPassword={""}
-          setCurrentPassword={() => {}}
+          currentPassword={currentPassword}
+          setCurrentPassword={setCurrentPassword}
           newPassword={newPassword}
           setNewPassword={setNewPassword}
           confirmPassword={confirmPassword}

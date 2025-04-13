@@ -33,6 +33,8 @@ const ProfileEditor = ({
   const [showPassword, setShowPassword] = React.useState(false);
   const [showNewPassword, setShowNewPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  const [passwordError, setPasswordError] = React.useState('');
+  const [phoneError, setPhoneError] = React.useState('');
 
   return (
     <div className="flex flex-col gap-y-5">
@@ -43,7 +45,7 @@ const ProfileEditor = ({
           value={email}
           readOnly
           placeholder="이메일을 입력해주세요"
-          className="rounded-[10px] border bg-gray-100 p-2 shadow focus:outline-none text-gray-600 placeholder:text-gray-600"
+          className="rounded-[10px] border bg-gray-100 p-2 shadow focus:outline-none text-gray-600 placeholder:text-gray-600 text-black font-semibold"
         />
       </div>
 
@@ -54,8 +56,11 @@ const ProfileEditor = ({
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
           placeholder="닉네임을 입력해주세요"
-          className="rounded-[10px] border p-2 shadow focus:outline-none placeholder:text-gray-600"
+          className="rounded-[10px] border p-2 shadow focus:outline-none placeholder:text-gray-600 text-black font-semibold"
         />
+        {nickname.trim().length > 0 && nickname.trim().length < 2 && (
+          <p className="text-sm text-red-500 mt-1">닉네임은 최소 2자 이상이어야 합니다.</p>
+        )}
       </div>
 
       <div className="flex flex-col gap-y-1">
@@ -63,10 +68,22 @@ const ProfileEditor = ({
         <input
           type="tel"
           value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
+          onChange={(e) => {
+            const raw = e.target.value.replace(/[^0-9]/g, '').slice(0, 11);
+            const formatted = raw
+              .replace(/^(\d{3})(\d{3,4})(\d{4})$/, (_, a, b, c) => `${a}-${b}-${c}`);
+            setPhoneNumber(formatted);
+
+            if (raw.length !== 11) {
+              setPhoneError('전화번호는 11자리여야 합니다.');
+            } else {
+              setPhoneError('');
+            }
+          }}
           placeholder="전화번호를 입력해주세요"
-          className="rounded-[10px] border p-2 shadow focus:outline-none placeholder:text-gray-600"
+          className="rounded-[10px] border p-2 shadow focus:outline-none placeholder:text-gray-600 text-black font-semibold"
         />
+        {phoneError && <p className="text-sm text-red-500 mt-1">{phoneError}</p>}
       </div>
 
       <h2 className="text-lg font-bold text-black mt-4 mb-1">비밀번호 변경</h2>
@@ -79,7 +96,7 @@ const ProfileEditor = ({
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
             placeholder="현재 비밀번호를 입력해주세요"
-            className="w-full rounded-[10px] border p-2 shadow focus:outline-none placeholder:text-gray-600"
+            className="w-full rounded-[10px] border p-2 shadow focus:outline-none placeholder:text-gray-600 text-black font-semibold"
           />
           <span
             onClick={() => setShowPassword(!showPassword)}
@@ -88,7 +105,9 @@ const ProfileEditor = ({
             {showPassword ? <FiEye /> : <FiEyeOff />}
           </span>
         </div>
-        {/* <p className="text-sm text-red-500 mt-1">비밀번호가 너무 짧습니다.</p> */}
+        {currentPassword.length > 0 && currentPassword.length < 6 && (
+          <p className="text-sm text-red-500 mt-1">비밀번호가 너무 짧습니다.</p>
+        )}
       </div>
 
       <div className="flex flex-col gap-y-1">
@@ -99,7 +118,7 @@ const ProfileEditor = ({
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             placeholder="새 비밀번호를 입력해주세요"
-            className="w-full rounded-[10px] border p-2 shadow focus:outline-none placeholder:text-gray-600"
+            className="w-full rounded-[10px] border p-2 shadow focus:outline-none placeholder:text-gray-600 text-black font-semibold"
           />
           <span
             onClick={() => setShowNewPassword(!showNewPassword)}
@@ -108,7 +127,9 @@ const ProfileEditor = ({
             {showNewPassword ? <FiEye /> : <FiEyeOff />}
           </span>
         </div>
-        {/* <p className="text-sm text-red-500 mt-1">비밀번호가 너무 짧습니다.</p> */}
+        {newPassword.length > 0 && newPassword.length < 6 && (
+          <p className="text-sm text-red-500 mt-1">비밀번호가 너무 짧습니다.</p>
+        )}
       </div>
 
       <div className="flex flex-col gap-y-1">
@@ -117,9 +138,18 @@ const ProfileEditor = ({
           <input
             type={showConfirmPassword ? 'text' : 'password'}
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              setConfirmPassword(value);
+
+              if (newPassword !== value) {
+                setPasswordError('비밀번호가 일치하지 않습니다.');
+              } else {
+                setPasswordError('');
+              }
+            }}
             placeholder="비밀번호 확인을 입력해주세요"
-            className="w-full rounded-[10px] border p-2 shadow focus:outline-none placeholder:text-gray-600"
+            className="w-full rounded-[10px] border p-2 shadow focus:outline-none placeholder:text-gray-600 text-black font-semibold"
           />
           <span
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -128,7 +158,7 @@ const ProfileEditor = ({
             {showConfirmPassword ? <FiEye /> : <FiEyeOff />}
           </span>
         </div>
-        {/* <p className="text-sm text-red-500 mt-1">비밀번호가 너무 짧습니다.</p> */}
+        {passwordError && <p className="text-sm text-red-500 mt-1">{passwordError}</p>}
       </div>
     </div>
   );
