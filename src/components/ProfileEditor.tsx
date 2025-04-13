@@ -138,9 +138,11 @@ const ProfileEditor = ({
           <input
             type={showConfirmPassword ? 'text' : 'password'}
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            onBlur={() => {
-              if (newPassword !== confirmPassword) {
+            onChange={(e) => {
+              const value = e.target.value;
+              setConfirmPassword(value);
+
+              if (newPassword !== value) {
                 setPasswordError('비밀번호가 일치하지 않습니다.');
               } else {
                 setPasswordError('');

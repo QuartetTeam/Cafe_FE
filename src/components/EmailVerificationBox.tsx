@@ -79,8 +79,13 @@ const EmailVerificationBox = ({
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && validateEmail(email)) {
+              handleRequestVerification();
+            }
+          }}
           placeholder="이메일 입력"
-          className="rounded-[10px] border p-2 shadow focus:outline-non text-gray-600"
+          className="rounded-[10px] border p-2 shadow focus:outline-none text-gray-600"
         />
         <button
           type="button"
