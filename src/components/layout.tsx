@@ -1,12 +1,12 @@
 "use client"; // 클라이언트 컴포넌트로 설정
 
 import { useState } from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "@components/Sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
-export default function MyPageLayout({ children }: { children: React.ReactNode }) {
+const MyPageLayout = ({ children }: { children: React.ReactNode }) => {
   const user = {
     name: "서은",
     profileImageUrl: "", // 프로필 사진 URL로 대체
@@ -92,4 +92,6 @@ export default function MyPageLayout({ children }: { children: React.ReactNode }
       </div>
     </div>
   );
-}
+};
+
+export default MyPageLayout;

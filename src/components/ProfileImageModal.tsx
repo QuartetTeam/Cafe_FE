@@ -7,7 +7,7 @@ interface ProfileImageModalProps {
   closeModal: () => void;
 }
 
-const ProfileImageModal: React.FC<ProfileImageModalProps> = ({ setProfileImage, closeModal }) => {
+const ProfileImageModal = ({ setProfileImage, closeModal }: ProfileImageModalProps) => {
     const fileInputRef = React.useRef<HTMLInputElement>(null);
     const router = useRouter();
 

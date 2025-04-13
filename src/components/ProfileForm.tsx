@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import PasswordVerification from "../components/PasswordVerification";
-import ProfileImageModal from "../components/ProfileImageModal";
+import PasswordVerification from "@components/PasswordVerification";
+import ProfileImageModal from "@components/ProfileImageModal";
 import ProfileUpdateForm from "./ProfileUpdateForm";
+import ProfileEditor from './ProfileEditor';
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const formatPhoneNumber = (value: string) => {
@@ -19,7 +20,7 @@ const validatePassword = (password: string) => {
   return regex.test(password);
 };
 
-export default function ProfileForm() {
+const ProfileForm = () => {
   const router = useRouter();
 
   const [isVerified, setIsVerified] = useState(false);
@@ -31,6 +32,7 @@ export default function ProfileForm() {
   const [phone, setPhone] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -132,13 +134,21 @@ export default function ProfileForm() {
     e.preventDefault();
     validateForm();
     if (Object.keys(errors).length === 0) {
-      console.log("변경사항 저장됨"); // 여기에 실제 제출 로직을 연결할 수 있음, 현재는 로그로만 확인
-      // 나중에 이전 페이지로 이동하려면 아래 주석 해제 - 무조건 이전 페이지로 이동, 이전 페이지 없으면 홈으로
-      // if (typeof window !== "undefined" && window.history.length > 1) {
-      //   router.back();
-      // } else {
-      //   router.push("/mypage-member1");
-      // }
+      const profileData = {
+        nickname,
+        phone,
+        currentPassword,
+        newPassword,
+        confirmPassword,
+        profileImage,
+      };
+
+      console.log("변경사항 저장됨:", profileData);
+
+      // TODO: 여기에 실제 API 요청 또는 로컬 저장 로직 추가
+      // 예: await fetch('/api/update-profile', { method: 'POST', body: JSON.stringify(profileData) });
+
+      // router.push("/mypage-member1"); // 저장 후 이동 가능
     }
   };
 
@@ -164,106 +174,23 @@ export default function ProfileForm() {
       <ProfileUpdateForm
         profileImage={profileImage}
         setProfileImage={setProfileImage}
-        openModal={() => setIsModalOpen(true)}
+        setIsModalOpen={setIsModalOpen}
       />
 
       <form onSubmit={handleSubmit} className="w-full max-w-3xl mx-auto px-2 sm:px-4">
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">이메일</label>
-          <input
-            type="email"
-            value="test1234@naver.com"
-            disabled
-            className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-100 text-gray-700"
-          />
-          <p className="text-sm text-red-500 mt-1">* 이메일은 변경 불가능한 항목입니다.</p>
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">닉네임</label>
-          <input
-            type="text"
-            value={nickname}
-            onChange={(e) => handleChange("nickname", e.target.value)}
-            placeholder="닉네임을 입력해주세요."
-            className="w-full px-3 py-2 border border-gray-300 rounded text-gray-900"
-          />
-          {touched.nickname && errors.nickname && (
-            <p className="text-sm text-red-500 mt-1">{errors.nickname}</p>
-          )}
-        </div>
-
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-1">전화번호</label>
-          <input
-            type="tel"
-            value={phone}
-            onChange={(e) => handleChange("phone", e.target.value)}
-            placeholder="010-1234-5678"
-            className="w-full px-3 py-2 border border-gray-300 rounded text-gray-900"
-          />
-          {touched.phone && errors.phone && <p className="text-sm text-red-500 mt-1">{errors.phone}</p>}
-        </div>
-
-        <h2 className="text-lg font-bold text-gray-900 mb-4">비밀번호 변경</h2>
-
-        <div className="mb-4 relative">
-          <label className="block text-sm font-medium text-gray-700 mb-1">현재 비밀번호</label>
-          <input
-            type={showCurrentPassword ? "text" : "password"}
-            placeholder="현재 비밀번호를 입력해주세요."
-            className="w-full px-3 py-2 border border-gray-300 rounded text-gray-900 pr-10"
-          />
-          <button
-            type="button"
-            onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-            className="absolute right-3 top-9 text-gray-500"
-          >
-            {showCurrentPassword ? <FiEyeOff /> : <FiEye />}
-          </button>
-        </div>
-
-        <div className="mb-4 relative">
-          <label className="block text-sm font-medium text-gray-700 mb-1">새 비밀번호</label>
-          <input
-            type={showNewPassword ? "text" : "password"}
-            placeholder="새 비밀번호를 입력해주세요."
-            value={newPassword}
-            onChange={(e) => handleChange("newPassword", e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded text-gray-900 pr-10"
-          />
-          <button
-            type="button"
-            onClick={() => setShowNewPassword(!showNewPassword)}
-            className="absolute right-3 top-9 text-gray-500"
-          >
-            {showNewPassword ? <FiEyeOff /> : <FiEye />}
-          </button>
-          {touched.newPassword && errors.newPassword && (
-            <p className="text-sm text-red-500 mt-1">{errors.newPassword}</p>
-          )}
-        </div>
-
-        <div className="mb-6 relative">
-          <label className="block text-sm font-medium text-gray-700 mb-1">비밀번호 확인</label>
-          <input
-            type={showConfirmPassword ? "text" : "password"}
-            placeholder="비밀번호를 다시 입력해주세요."
-            value={confirmPassword}
-            onChange={(e) => handleChange("confirmPassword", e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded text-gray-900 pr-10"
-          />
-          <button
-            type="button"
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            className="absolute right-3 top-9 text-gray-500"
-          >
-            {showConfirmPassword ? <FiEyeOff /> : <FiEye />}
-          </button>
-          {touched.confirmPassword && errors.confirmPassword && (
-            <p className="text-sm text-red-500 mt-1">{errors.confirmPassword}</p>
-          )}
-        </div>
+        <ProfileEditor
+          email="test1234@naver.com"
+          nickname={nickname}
+          setNickname={setNickname}
+          phoneNumber={phone}
+          setPhoneNumber={setPhone}
+          currentPassword={currentPassword}
+          setCurrentPassword={setCurrentPassword}
+          newPassword={newPassword}
+          setNewPassword={setNewPassword}
+          confirmPassword={confirmPassword}
+          setConfirmPassword={setConfirmPassword}
+        />
 
         {isModalOpen && (
           <ProfileImageModal
@@ -283,4 +210,6 @@ export default function ProfileForm() {
       </form>
     </div>
   );
-}
+};
+
+export default ProfileForm;
