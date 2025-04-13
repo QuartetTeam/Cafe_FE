@@ -89,7 +89,7 @@ const RegisterPage: React.FC = () => {
   }
 
   return (
-    <div className="mx-auto flex max-w-[1200px] flex-col gap-y-[40px] p-[20px] sm:p-[50px] overflow-x-hidden">
+    <div className="mx-auto flex max-w-[1200px] flex-col gap-y-[40px] p-[20px] sm:p-[50px] pt-[80px] overflow-x-hidden">
       <div>
         <h1 className="text-[30px] text-gray-800">매장 정보 수정</h1>
       </div>

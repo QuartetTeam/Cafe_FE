@@ -1,7 +1,7 @@
 "use client";
 import ProfileForm from "@components/storeform";
 
-const MyPage = (): JSX.Element => {
+const MyPage = () => {
   return (
     <>
       <ProfileForm />

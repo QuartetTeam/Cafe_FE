@@ -24,9 +24,9 @@ const RepresentativeImageUploader: React.FC<RepresentativeImageUploaderProps> = 
     };
   
     return (
-      <div className="flex flex-col items-center gap-y-[10px]">
+      <div className="flex flex-col items-center gap-y-[16px]">
         <Image src={representativeImage || '/next.svg'} alt="대표 이미지" width={360} height={240} />
-        <div className="flex flex-col items-center gap-y-[7px]">
+        <div className="flex flex-col items-center gap-y-[12px]">
           <span className="text-[18px] text-gray-800">대표 이미지</span>
           <input
             type="file"
