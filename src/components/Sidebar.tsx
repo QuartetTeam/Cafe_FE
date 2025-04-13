@@ -13,7 +13,7 @@ interface SidebarProps {
   className?: string;
 }
 
-const Sidebar = ({ isOpen, onClose, className }: SidebarProps) => {
+const Sidebar = ({ isOpen, onClose, className }: SidebarProps): JSX.Element => {
   const pathname = usePathname();
   const router = useRouter();
   const [isWithdrawalModalOpen, setIsWithdrawalModalOpen] = useState(false);
@@ -62,7 +62,7 @@ const Sidebar = ({ isOpen, onClose, className }: SidebarProps) => {
             </li>
             <li>
               <Link
-                href="/mypage-owner/edit"
+                href="/store-owner"
                 className={`block text-center w-full text-gray-700 hover:text-[#a66a2d] ${
                   pathname.startsWith("/mypage-owner/edit") ? "font-bold text-black" : ""
                 }`}
@@ -73,7 +73,7 @@ const Sidebar = ({ isOpen, onClose, className }: SidebarProps) => {
             </li>
             <li>
               <Link
-                href="/mypage-owner/manage"
+                href="/manage-owner"
                 className={`block text-center w-full text-gray-700 hover:text-[#a66a2d] ${
                   pathname.startsWith("/mypage-owner/manage") ? "font-bold text-black" : ""
                 }`}

@@ -1,10 +1,12 @@
 "use client";
-import ProfileForm from "../../components/ProfileForm";
+import ProfileForm from "@components/ProfileForm";
 
-export default function MyPage() {
+const MyPage = (): JSX.Element => {
   return (
     <>
       <ProfileForm />
     </>
   );
-}
+};
+
+export default MyPage;

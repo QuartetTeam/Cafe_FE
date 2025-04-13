@@ -8,11 +8,11 @@ interface ProfileUpdateFormProps {
 }
 
 // ProfileUpdateForm.tsx
-export default function ProfileUpdateForm({
+const ProfileUpdateForm = ({
   profileImage,
   setProfileImage,
   openModal,
-}: ProfileUpdateFormProps) {
+}: ProfileUpdateFormProps): JSX.Element => {
   const [imageError, setImageError] = useState(false);
 
   return (
@@ -46,4 +46,6 @@ export default function ProfileUpdateForm({
       </div>
     </form>
   );
-}
+};
+
+export default ProfileUpdateForm;

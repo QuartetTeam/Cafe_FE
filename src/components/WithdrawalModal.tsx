@@ -6,7 +6,7 @@ interface WithdrawalModalProps {
   onConfirm: () => void;
 }
 
-export default function WithdrawalModal({ closeModal, onConfirm }: WithdrawalModalProps) {
+const WithdrawalModal = ({ closeModal, onConfirm }: WithdrawalModalProps): JSX.Element => {
   const router = useRouter();
 
   const handleConfirm = async () => {
@@ -30,4 +30,6 @@ export default function WithdrawalModal({ closeModal, onConfirm }: WithdrawalMod
       </div>
     </div>
   );
-}
+};
+
+export default WithdrawalModal;
