@@ -13,7 +13,7 @@ interface SidebarProps {
   className?: string;
 }
 
-const Sidebar = ({ isOpen, onClose, className }: SidebarProps): JSX.Element => {
+const Sidebar = ({ isOpen, onClose, className }: SidebarProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const [isWithdrawalModalOpen, setIsWithdrawalModalOpen] = useState(false);

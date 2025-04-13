@@ -6,7 +6,7 @@ interface WithdrawalModalProps {
   onConfirm: () => void;
 }
 
-const WithdrawalModal = ({ closeModal, onConfirm }: WithdrawalModalProps): JSX.Element => {
+const WithdrawalModal = ({ closeModal, onConfirm }: WithdrawalModalProps) => {
   const router = useRouter();
 
   const handleConfirm = async () => {

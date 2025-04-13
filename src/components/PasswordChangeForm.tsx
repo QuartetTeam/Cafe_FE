@@ -13,12 +13,12 @@ interface PasswordChangeFormProps {
 }
 
 // 비밀번호 변경 폼 컴포넌트 정의
-export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
+export const PasswordChangeForm = ({
   newPassword,
   setNewPassword,
   confirmPassword,
   setConfirmPassword,
-}) => {
+}: PasswordChangeFormProps) => {
   const [email, setEmail] = React.useState(""); // 이메일 상태
   const [verificationCode, setVerificationCode] = React.useState(""); // 인증번호 상태
   const router = useRouter();

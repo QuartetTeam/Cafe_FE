@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
-const MyPageLayout = ({ children }: { children: React.ReactNode }): JSX.Element => {
+const MyPageLayout = ({ children }: { children: React.ReactNode }) => {
   const user = {
     name: "서은",
     profileImageUrl: "", // 프로필 사진 URL로 대체

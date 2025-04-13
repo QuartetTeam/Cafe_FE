@@ -29,7 +29,7 @@ const ProfileEditor = ({
   setNewPassword,
   confirmPassword,
   setConfirmPassword,
-}: ProfileEditorProps): JSX.Element => {
+}: ProfileEditorProps) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [showNewPassword, setShowNewPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);

@@ -18,7 +18,7 @@ interface PasswordSectionProps {
     setNewPassword,
     confirmPassword,
     setConfirmPassword,
-  }: PasswordSectionProps): JSX.Element => {
+  }: PasswordSectionProps) => {
     return (
       <div className="flex flex-col gap-y-5 mt-4">
         <div className="flex flex-col gap-y-1">
@@ -55,4 +55,3 @@ interface PasswordSectionProps {
   };
   
   export default PasswordSection;
-  

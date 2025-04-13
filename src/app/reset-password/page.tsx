@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline"; // Heroicons 아이콘 임포트
 
-const ResetPasswordPage = (): JSX.Element => {
+const ResetPasswordPage = () => {
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);

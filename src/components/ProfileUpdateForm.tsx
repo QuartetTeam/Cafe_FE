@@ -4,15 +4,15 @@ import Image from "next/image";
 interface ProfileUpdateFormProps {
   profileImage: File | string | null;
   setProfileImage: React.Dispatch<React.SetStateAction<File | string | null>>;
-  openModal: () => void;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // ProfileUpdateForm.tsx
 const ProfileUpdateForm = ({
   profileImage,
   setProfileImage,
-  openModal,
-}: ProfileUpdateFormProps): JSX.Element => {
+  setIsModalOpen,
+}: ProfileUpdateFormProps) => {
   const [imageError, setImageError] = useState(false);
 
   return (
@@ -37,7 +37,7 @@ const ProfileUpdateForm = ({
           </div>
           <button
             type="button"
-            onClick={openModal}
+            onClick={() => setIsModalOpen(true)}
             className="bg-[#a66a2d] text-white px-3 py-1 rounded-full text-sm"
           >
             변경

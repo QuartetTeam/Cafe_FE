@@ -20,7 +20,7 @@ const validatePassword = (password: string) => {
   return regex.test(password);
 };
 
-const ProfileForm = (): JSX.Element => {
+const ProfileForm = () => {
   const router = useRouter();
 
   const [isVerified, setIsVerified] = useState(false);
@@ -165,7 +165,7 @@ const ProfileForm = (): JSX.Element => {
       <ProfileUpdateForm
         profileImage={profileImage}
         setProfileImage={setProfileImage}
-        openModal={() => setIsModalOpen(true)}
+        setIsModalOpen={setIsModalOpen}
       />
 
       <form onSubmit={handleSubmit} className="w-full max-w-3xl mx-auto px-2 sm:px-4">

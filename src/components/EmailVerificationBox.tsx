@@ -16,7 +16,7 @@ const EmailVerificationBox = ({
   verificationCode,
   setVerificationCode,
   onVerify,
-}: EmailVerificationBoxProps): JSX.Element => {
+}: EmailVerificationBoxProps) => {
   const [timeLeft, setTimeLeft] = useState(180);
   const [isVerified, setIsVerified] = useState(false);
   const [isInputVisible, setIsInputVisible] = useState(false);

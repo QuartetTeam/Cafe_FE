@@ -17,7 +17,7 @@ const PasswordVerification = ({
   setFailCount,
   setShowResetModal,
   setShowPasswordReset, // 모달 열기 함수 받기
-}: PasswordVerificationProps): JSX.Element => {
+}: PasswordVerificationProps) => {
   const [password, setPassword] = useState("0000");  // 비밀번호 상태
   const [showPassword, setShowPassword] = useState(false);  // 비밀번호 표시 여부
   const [errorMessage, setErrorMessage] = useState(""); // 오류 메시지 상태
